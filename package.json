@@ -1,0 +1,22 @@
+{
+  "name": "yasspa",
+  "version": "0.1.0",
+  "description": "Yet another SBHS Student Portal alternative.",
+  "main": "index.js",
+  "scripts": {
+    "dev:app": "cd ./packages/app/ && npm start",
+    "dev:server": "cd ./packages/server/ && npm run dev",
+    "prod:app": "cd ./packages/app/ && npm run build",
+    "prod:server": "cd ./packages/server/ && npm run prod",
+    "lint:server": "cd ./packages/server/ && npm run lint",
+    "format": "prettier \"./packages/**/*.{ts,tsx,js,json}\""
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "chickensalt",
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}
