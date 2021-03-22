@@ -1,14 +1,15 @@
 {
   "name": "yasspa",
+  "private": true,
   "version": "0.1.0",
   "description": "Yet another SBHS Student Portal alternative.",
   "main": "index.js",
   "scripts": {
-    "dev:app": "cd ./packages/app/ && npm start",
-    "dev:server": "cd ./packages/server/ && npm run dev",
-    "prod:app": "cd ./packages/app/ && npm run build",
-    "prod:server": "cd ./packages/server/ && npm run prod",
-    "lint:server": "cd ./packages/server/ && npm run lint",
+    "dev:app": "yarn workspace @yasspa/app start",
+    "dev:server": "yarn workspace @yasspa/server dev",
+    "prod:app": "yarn workspace @yasspa/app build",
+    "prod:server": "yarn workspace @yasspa/server prod",
+    "lint:server": "yarn workspace @yasspa/server lint",
     "format": "prettier \"./packages/**/*.{ts,tsx,js,json}\""
   },
   "workspaces": [
