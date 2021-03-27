@@ -1,11 +1,5 @@
-# Yarn stuff
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
+# Packages
+node_modules/
 
 # Secrets
 packages/server/*.env
