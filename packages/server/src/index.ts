@@ -1,11 +1,26 @@
 import express from "express";
 import compression from "compression";
 import session from "express-session";
+import auth from "./auth";
+import api from "./api";
+import { AuthorizationCode } from "simple-oauth2";
 
 const PORT = parseInt(process.env.PORT ?? "8080");
 const IP = process.env.IP ?? "0.0.0.0";
 
 const app = express();
+
+const oauth2 = new AuthorizationCode({
+  client: {
+    id: process.env.CLIENT_ID!,
+    secret: process.env.CLIENT_SECRET!,
+  },
+  auth: {
+    tokenHost: "https://student.sbhs.net.au/api",
+    tokenPath: "/token",
+    authorizePath: "/authorize",
+  },
+});
 
 app.use(compression());
 app.use(
@@ -19,5 +34,8 @@ app.use(
   })
 );
 app.use(express.static("../app/build/"));
+
+auth(app, oauth2);
+api(app, oauth2);
 
 app.listen(PORT, IP, () => console.log(`Server up on ${IP}:${PORT}`));

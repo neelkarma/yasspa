@@ -1,20 +1,8 @@
-import { AuthorizationCode as OAuth2Client } from "simple-oauth2";
+import type { AuthorizationCode } from "simple-oauth2";
 import type { Express } from "express";
 
-export default (app: Express) => {
-  const client = new OAuth2Client({
-    client: {
-      id: process.env.CLIENT_ID!,
-      secret: process.env.CLIENT_SECRET!,
-    },
-    auth: {
-      tokenHost: "https://student.sbhs.net.au/api",
-      tokenPath: "/token",
-      authorizePath: "/authorize",
-    },
-  });
-
-  const authorizationUri = client.authorizeURL({
+export default (app: Express, oauth2: AuthorizationCode) => {
+  const authorizationUri = oauth2.authorizeURL({
     redirect_uri: process.env.REDIRECT_URI!,
     scope: "all-ro",
   });
@@ -35,7 +23,7 @@ export default (app: Express) => {
   app.get("/auth/callback", async (req, res) => {
     const { code } = req.query;
     try {
-      req.session.token = await client.getToken({
+      req.session.token = await oauth2.getToken({
         code: code!.toString(),
         redirect_uri: process.env.REDIRECT_URI!,
       });
@@ -50,7 +38,7 @@ export default (app: Express) => {
     if (!req.session.token)
       return res.status(403).json({ error: "Invalid Authorization" });
 
-    const accessToken = client.createToken(req.session.token);
+    const accessToken = oauth2.createToken(req.session.token);
 
     if (!accessToken.expired())
       return res.status(200).json({
