@@ -12,11 +12,7 @@
     "lint:server": "yarn workspace @yasspa/server lint",
     "format": "prettier \"./packages/**/*.{ts,tsx,js,json}\""
   },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
+  "workspaces": ["packages/*"],
   "author": "chickensalt",
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
