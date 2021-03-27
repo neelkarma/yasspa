@@ -10,7 +10,7 @@
     "prod:app": "yarn workspace @yasspa/app build",
     "prod:server": "yarn workspace @yasspa/server prod",
     "lint:server": "yarn workspace @yasspa/server lint",
-    "format": "prettier \"./packages/**/*.{ts,tsx,js,json}\""
+    "format": "prettier -w \"./packages/**/*.{ts,tsx,js,json}\""
   },
   "workspaces": ["packages/*"],
   "author": "chickensalt",
