@@ -8,7 +8,7 @@ export default (app: Express, oauth2: AuthorizationCode) => {
   });
 
   // Login
-  app.get("/auth/login", (req, res) => {
+  app.get("/auth/login", (_, res) => {
     res.redirect(authorizationUri);
   });
 
