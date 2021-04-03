@@ -1,5 +1,12 @@
-import type { Express } from "express";
+import type {
+  Express,
+  Request as ExpressReq,
+  Response as ExpressRes,
+} from "express";
 import type { AuthorizationCode } from "simple-oauth2";
+import axios, { AxiosError } from "axios";
+import querystring from "querystring";
+
 /*
 
 VALID SBHS API ENDPOINTS
@@ -17,6 +24,80 @@ VALID SBHS API ENDPOINTS
 
 */
 
-export default (app: Express, oauth2: AuthorizationCode) => {
+type sbhsApiEndpoint =
+  | "barcodenews/list.json"
+  | "calendar/days.json"
+  | "calendar/terms.json"
+  | "dailynews/list.json"
+  | "diarycalendar/events.json"
+  | "timetable/bells.json"
+  | "timetable/daytimetable.json"
+  | "timetable/timetable.json"
+  | "details/participation.json"
+  | "details/userinfo.json";
+
+type sbhsApiOpts = {
+  date?: string;
+  from?: string;
+  to?: string;
+  year?: string;
+};
+
+export default (app: Express, oauth2: AuthorizationCode, apiPath: string) => {
+  const sbhsApi = axios.create({
+    baseURL: apiPath,
+  });
+
+  const getResource = async (
+    resourcePath: sbhsApiEndpoint,
+    req: ExpressReq,
+    res: ExpressRes,
+    apiOpts?: sbhsApiOpts
+  ) => {
+    if (!req.session.token)
+      return res.status(403).json({ error: "Unauthorized" });
+
+    const tokenObj = oauth2.createToken(req.session.token);
+
+    try {
+      if (tokenObj.expired())
+        req.session.token = await tokenObj
+          .refresh()
+          .then((tokenObj) => tokenObj.token);
+    } catch {
+      return res.status(500).json({ error: "The SBHS server fucked up" });
+    }
+
+    if (!req.session.token)
+      return res.status(500).json({ error: "Internal Error" });
+
+    try {
+      const apiRes = await sbhsApi.get(
+        resourcePath + (apiOpts ? "?" + querystring.stringify(apiOpts) : null),
+        {
+          headers: {
+            Authorization: "Bearer " + req.session.token.access_token,
+          },
+        }
+      );
+
+      return res.status(200).json({ data: apiRes.data });
+    } catch (e) {
+      const error = <AxiosError>e;
+
+      if (error.response) {
+        if (error.response.status >= 500)
+          return res.status(500).json({ error: "The SBHS server fucked up" });
+        if (error.response.status >= 400)
+          return res.status(500).json({ error: "Internal Error" });
+      }
+
+      if (error.request)
+        return res.status(500).json({ error: "SBHS Server Unreachable" });
+
+      return res.status(500).json({ error: "Internal Error" });
+    }
+  };
+
   //TODO: Set up data endpoints here
 };

@@ -10,7 +10,7 @@ const IP = process.env.IP ?? "0.0.0.0";
 
 const app = express();
 
-const oauth2 = new AuthorizationCode({
+const oauth2Config = {
   client: {
     id: process.env.CLIENT_ID!,
     secret: process.env.CLIENT_SECRET!,
@@ -20,7 +20,9 @@ const oauth2 = new AuthorizationCode({
     tokenPath: "/token",
     authorizePath: "/authorize",
   },
-});
+}
+
+const oauth2 = new AuthorizationCode(oauth2Config);
 
 app.use(compression());
 app.use(
@@ -36,6 +38,6 @@ app.use(
 app.use(express.static("../app/build/"));
 
 auth(app, oauth2);
-api(app, oauth2);
+api(app, oauth2, oauth2Config.auth.tokenHost);
 
 app.listen(PORT, IP, () => console.log(`Server up on ${IP}:${PORT}`));

@@ -33,28 +33,24 @@ export default (app: Express, oauth2: AuthorizationCode) => {
     }
   });
 
-  // Getting token from session
+  // Getting token from session, refreshing if not found
   app.get("/auth/getToken", async (req, res) => {
     if (!req.session.token)
       return res.status(403).json({ error: "Invalid Authorization" });
 
-    const accessToken = oauth2.createToken(req.session.token);
+    let tokenObj = oauth2.createToken(req.session.token);
 
-    if (!accessToken.expired())
+    if (!tokenObj.expired())
       return res.status(200).json({
-        accessToken: req.session.token.access_token,
-        expires: req.session.token.expires_in,
+        token: tokenObj.token,
       });
 
     // Refresh the token
     try {
-      req.session.token = await accessToken
-        .refresh()
-        .then((tokenObject) => tokenObject.token);
+      tokenObj = await tokenObj.refresh();
 
       res.status(200).json({
-        accessToken: req.session.token!.access_token,
-        expires: req.session.token!.expires_in,
+        token: tokenObj.token,
       });
     } catch {
       return res.status(500).json({ error: "The SBHS server fucked up" });
