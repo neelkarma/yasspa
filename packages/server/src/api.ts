@@ -27,14 +27,14 @@ VALID SBHS API ENDPOINTS
 type sbhsApiEndpoint =
   | "barcodenews/list.json"
   | "calendar/days.json"
-  | "calendar/terms.json"
-  | "dailynews/list.json"
-  | "diarycalendar/events.json"
+  | "calendar/terms.json" // Used
+  | "dailynews/list.json" // Used
+  | "diarycalendar/events.json" // Used
   | "timetable/bells.json"
-  | "timetable/daytimetable.json"
-  | "timetable/timetable.json"
-  | "details/participation.json"
-  | "details/userinfo.json";
+  | "timetable/daytimetable.json" // Used
+  | "timetable/timetable.json" // Used
+  | "details/participation.json" // Used
+  | "details/userinfo.json"; //Used
 
 type sbhsApiOpts = {
   date?: string;
@@ -99,5 +99,34 @@ export default (app: Express, oauth2: AuthorizationCode, apiPath: string) => {
     }
   };
 
-  //TODO: Set up data endpoints here
+  app.get("/api/terms", async (req, res) => {
+    await getResource("calendar/terms.json", req, res);
+  });
+
+  app.get("/api/dailynotices", async (req, res) => {
+    await getResource("dailynews/list.json", req, res);
+  });
+
+  app.get("/api/calendar", async (req, res) => {
+    await getResource("diarycalendar/events.json", req, res, {
+      from: req.query.from ? <string>req.query.from : undefined,
+      to: req.query.to ? <string>req.query.to : undefined,
+    });
+  });
+
+  app.get("/api/today", async (req, res) => {
+    await getResource("timetable/daytimetable.json", req, res);
+  });
+
+  app.get("/api/timetable", async (req, res) => {
+    await getResource("timetable/timetable.json", req, res);
+  });
+
+  app.get("/api/awardscheme", async (req, res) => {
+    await getResource("details/participation.json", req, res);
+  });
+
+  app.get("/api/userinfo", async (req, res) => {
+    await getResource("details/userinfo.json", req, res);
+  });
 };
