@@ -15,7 +15,8 @@ import { SWRConfig } from "swr";
 export const App = () => (
   <SWRConfig
     value={{
-      fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+      fetcher: (resource, init) =>
+        fetch(resource, init).then((res) => res.json()),
     }}
   >
     <ChakraProvider theme={theme}>

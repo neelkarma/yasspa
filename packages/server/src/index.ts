@@ -6,7 +6,7 @@ import api from "./api";
 import { AuthorizationCode } from "simple-oauth2";
 
 const PORT = parseInt(process.env.PORT ?? "8080");
-const IP = process.env.IP ?? "0.0.0.0";
+const IP = process.env.IP ?? "127.0.0.1";
 
 const app = express();
 
@@ -20,7 +20,7 @@ const oauth2Config = {
     tokenPath: "/token",
     authorizePath: "/authorize",
   },
-}
+};
 
 const oauth2 = new AuthorizationCode(oauth2Config);
 
@@ -39,5 +39,7 @@ app.use(express.static("../app/build/"));
 
 auth(app, oauth2);
 api(app, oauth2, oauth2Config.auth.tokenHost);
+
+app.get("/teapot", (_, res) => res.status(418).send("418 I'm a teapot"));
 
 app.listen(PORT, IP, () => console.log(`Server up on ${IP}:${PORT}`));
