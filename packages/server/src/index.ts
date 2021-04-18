@@ -35,11 +35,11 @@ app.use(
     },
   })
 );
-app.use(express.static("../app/build/"));
+app.use(express.static("../../app/build/"));
 
 auth(app, oauth2);
 api(app, oauth2, oauth2Config.auth.tokenHost);
 
-app.get("/teapot", (_, res) => res.status(418).send("418 I'm a teapot"));
+app.get("/secret", (_, res) => res.status(418).send("418 I'm a teapot"));
 
 app.listen(PORT, IP, () => console.log(`Server up on ${IP}:${PORT}`));

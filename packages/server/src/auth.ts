@@ -33,6 +33,12 @@ export default (app: Express, oauth2: AuthorizationCode) => {
     }
   });
 
+	// Check if user is authorized or not
+	app.get("/auth/status", (req, res) => {
+		if (req.session.token) return res.status(200).json({ authorized: true });
+		res.status(200).json({ authorized: false });
+	});
+
   // Getting token from session, refreshing if not found
   app.get("/auth/getToken", async (req, res) => {
     if (!req.session.token)

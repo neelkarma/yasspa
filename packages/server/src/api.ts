@@ -36,6 +36,7 @@ type sbhsApiEndpoint =
   | "details/participation.json" // Used
   | "details/userinfo.json"; //Used
 
+// Don't change this to an interface, it breaks if it's an interface
 type sbhsApiOpts = {
   date?: string;
   from?: string;
