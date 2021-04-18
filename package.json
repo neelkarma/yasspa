@@ -13,7 +13,8 @@
     "format": "prettier -w \"./packages/**/*.{ts,tsx,js,json}\""
   },
   "workspaces": [
-    "packages/*"
+    "app/",
+    "server/
   ],
   "author": "chickensalt",
   "license": "SEE LICENSE IN LICENSE",
