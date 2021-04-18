@@ -4,4 +4,4 @@
 
 **Status:** Pre-Alpha
 
-*Note:* Not accepting PRs or issues until release.
+_Note:_ Not accepting PRs or issues until release.

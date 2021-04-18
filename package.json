@@ -10,11 +10,11 @@
     "prod:app": "yarn workspace @yasspa/app build",
     "prod:server": "yarn workspace @yasspa/server prod",
     "lint:server": "yarn workspace @yasspa/server lint",
-    "format": "prettier -w \"./packages/**/*.{ts,tsx,js,json}\""
+    "format": "prettier -w \"./**/*.{ts,tsx,json,md}\""
   },
   "workspaces": [
     "app/",
-    "server/
+    "server/"
   ],
   "author": "chickensalt",
   "license": "SEE LICENSE IN LICENSE",
