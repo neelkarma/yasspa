@@ -5,7 +5,7 @@
   "description": "Yet another SBHS Student Portal alternative.",
   "main": "index.js",
   "scripts": {
-    "dev:app": "yarn workspace @yasspa/app start",
+    "dev:app": "yarn workspace @yasspa/app dev",
     "dev:server": "yarn workspace @yasspa/server dev",
     "prod:app": "yarn workspace @yasspa/app build",
     "prod:server": "yarn workspace @yasspa/server prod",
