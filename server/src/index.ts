@@ -5,8 +5,8 @@ import auth from "./auth";
 import api from "./api";
 import { AuthorizationCode } from "simple-oauth2";
 
-const PORT = parseInt(process.env.PORT ?? "8080");
-const IP = process.env.IP ?? "127.0.0.1";
+const PORT = parseInt(process.env.PORT ?? "8000");
+const IP = process.env.IP ?? "localhost";
 
 const app = express();
 
@@ -17,8 +17,8 @@ const oauth2Config = {
   },
   auth: {
     tokenHost: "https://student.sbhs.net.au/api",
-    tokenPath: "/token",
-    authorizePath: "/authorize",
+    tokenPath: "/api/token",
+    authorizePath: "/api/authorize",
   },
 };
 
@@ -35,7 +35,9 @@ app.use(
     },
   })
 );
-app.use(express.static("../../app/build/"));
+
+if (process.env.NODE_ENV == "production")
+  app.use(express.static("../../app/build/"));
 
 auth(app, oauth2);
 api(app, oauth2, oauth2Config.auth.tokenHost);

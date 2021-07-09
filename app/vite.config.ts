@@ -5,18 +5,11 @@ export default defineConfig({
   plugins: [reactRefresh()],
   server: {
     proxy: {
-      "^/api/.*": {
-        target: "http://localhost:8000/api/",
+      "^/(api)|(auth)": {
+        target: `http://localhost:8000`,
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-      "^/auth/.*": {
-        target: "http://localhost:8000/auth/",
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
+      }
     },
   },
 });

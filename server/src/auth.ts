@@ -1,10 +1,12 @@
 import type { AuthorizationCode } from "simple-oauth2";
 import type { Express } from "express";
+import { NIL as NIL_UUID } from "uuid";
 
 export default (app: Express, oauth2: AuthorizationCode) => {
   const authorizationUri = oauth2.authorizeURL({
     redirect_uri: process.env.REDIRECT_URI!,
     scope: "all-ro",
+    state: NIL_UUID
   });
 
   // Login

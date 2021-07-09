@@ -1,6 +1,3 @@
-//TODO: Fix fonts not working
-import "@fontsource/inter";
-import "@fontsource/raleway";
 import { extendTheme } from "@chakra-ui/react";
 
 export default extendTheme({
