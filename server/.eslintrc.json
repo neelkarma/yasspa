@@ -1,6 +1,0 @@
-{
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint/eslint-plugin"],
-  "extends": ["@typescript-eslint/recommended"],
-  "rules": {}
-}
