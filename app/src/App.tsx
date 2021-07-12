@@ -12,7 +12,7 @@ const App: React.FC<{}> = () => {
   if (!data.authorized) return <Landing />;
   return (
     <Box p={5} h="100vh">
-      <Flex h="100vh">
+      <Flex h="100%">
         <Timetable />
       </Flex>
     </Box>

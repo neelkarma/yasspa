@@ -7,10 +7,9 @@
   "scripts": {
     "dev": "dotenv -e .env.dev ts-node ./src/",
     "prod": "dotenv -e .env.prod ts-node ./src/",
-    "lint": "eslint . --ext .ts --fix"
+    "lint": "tsc --noEmit"
   },
   "author": "chickensalt",
-  "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
     "@types/compression": "^1.7.1",
     "@types/express": "^4.17.13",

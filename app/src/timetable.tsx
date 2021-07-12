@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Spacer, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Heading, Text, HStack } from "@chakra-ui/react";
 
 const Period: React.FC<{
   name: string;
@@ -19,15 +19,24 @@ const Period: React.FC<{
   isSub,
 }) => {
   return (
-    <Flex>
-      <Box>
-        <Text>{className}</Text>
-        <Text>
-          at {time} with {teacher}
-        </Text>
+    <Flex width="100%" my={5}>
+      <Box alignSelf="center">
+        <Text fontSize="1.3rem">{className}</Text>
+        <HStack spacing={1} fontWeight="light">
+          <Text>at</Text>
+          <Text color={isTimeChange ? "blue.300" : undefined}>{time}</Text>
+          <Text color="gray.400">with</Text>
+          <Text color={isSub ? "blue.300" : "gray.400"}>{teacher}</Text>
+        </HStack>
       </Box>
       <Spacer />
-      <Text>{room}</Text>
+      <Text
+        color={isRoomChange ? "blue.300" : undefined}
+        fontSize="1.2rem"
+        alignSelf="center"
+      >
+        {room}
+      </Text>
     </Flex>
   );
 };
@@ -37,7 +46,7 @@ const Break: React.FC<{
   time: string;
 }> = ({ type, time }) => {
   return (
-    <Flex>
+    <Flex color="gray.400" fontSize="1.2rem" my={5}>
       <Text>{type}</Text>
       <Spacer />
       <Text>{time}</Text>
@@ -49,16 +58,16 @@ const Timetable: React.FC<{}> = () => {
   return (
     <Box
       borderColor="gray.600"
+      borderWidth="1px"
       borderRadius={15}
       backgroundColor="gray.700"
-      //TODO: Fix height
-      h="90%"
+      h="100%"
       w={{ md: "100%", lg: "430px" }}
       p={5}
     >
-      <Box py={10} textAlign="center">
+      <Box py={10} textAlign="center" fontWeight="extrabold">
         <Heading>Roll Call in</Heading>
-        <Heading>9:48:27</Heading>
+        <Heading fontSize="5rem">9:48:27</Heading>
       </Box>
       <Period
         name="9W Music Adv"
