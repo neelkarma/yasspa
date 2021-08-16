@@ -19,7 +19,13 @@ const Period: React.FC<{
   isSub,
 }) => {
   return (
-    <Flex width="100%" my={5}>
+    <Flex
+      width="100%"
+      px={3}
+      py={4}
+      borderRadius={10}
+      _hover={{ backgroundColor: "gray.600" }}
+    >
       <Box alignSelf="center">
         <Text fontSize="1.3rem">{className}</Text>
         <HStack spacing={1} fontWeight="light">
@@ -46,7 +52,15 @@ const Break: React.FC<{
   time: string;
 }> = ({ type, time }) => {
   return (
-    <Flex color="gray.400" fontSize="1.2rem" my={5}>
+    <Flex
+      color="gray.400"
+      fontSize="1.2rem"
+      px={3}
+      py={4}
+      animation="forwards 1s"
+      borderRadius={10}
+      _hover={{ backgroundColor: "gray.600" }}
+    >
       <Text>{type}</Text>
       <Spacer />
       <Text>{time}</Text>
@@ -61,7 +75,7 @@ const Timetable: React.FC<{}> = () => {
       borderWidth="1px"
       borderRadius={15}
       backgroundColor="gray.700"
-      h="100%"
+      h={{ sm: undefined, lg: "100%" }}
       w={{ md: "100%", lg: "430px" }}
       p={5}
     >
