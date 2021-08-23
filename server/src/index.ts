@@ -16,7 +16,7 @@ const oauth2Config = {
     secret: process.env.CLIENT_SECRET!,
   },
   auth: {
-    tokenHost: "https://student.sbhs.net.au/api",
+    tokenHost: "https://student.sbhs.net.au/api/",
     tokenPath: "/api/token",
     authorizePath: "/api/authorize",
   },

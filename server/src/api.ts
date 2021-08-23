@@ -5,7 +5,7 @@ import type {
 } from "express";
 import type { AuthorizationCode } from "simple-oauth2";
 import axios, { AxiosError } from "axios";
-import querystring from "querystring";
+import fetch, { Headers } from "node-fetch";
 
 /*
 
@@ -45,10 +45,6 @@ type sbhsApiOpts = {
 };
 
 export default (app: Express, oauth2: AuthorizationCode, apiPath: string) => {
-  const sbhsApi = axios.create({
-    baseURL: apiPath,
-  });
-
   const getResource = async (
     resourcePath: sbhsApiEndpoint,
     req: ExpressReq,
@@ -73,29 +69,25 @@ export default (app: Express, oauth2: AuthorizationCode, apiPath: string) => {
       return res.status(500).json({ error: "Internal Error" });
 
     try {
-      const apiRes = await sbhsApi.get(
-        resourcePath + (apiOpts ? "?" + querystring.stringify(apiOpts) : null),
+      const apiRes = await fetch(
+        apiPath +
+          resourcePath +
+          (apiOpts ? "?" + new URLSearchParams(apiOpts) : ""),
         {
-          headers: {
+          headers: new Headers({
             Authorization: "Bearer " + req.session.token.access_token,
-          },
+          }),
         }
       );
-
-      return res.status(200).json({ data: apiRes.data });
-    } catch (e) {
-      const error = <AxiosError>e;
-
-      if (error.response) {
-        if (error.response.status >= 500)
+      if (!apiRes.ok) {
+        if (apiRes.status >= 500)
           return res.status(500).json({ error: "The SBHS server fucked up" });
-        if (error.response.status >= 400)
+        if (apiRes.status >= 400)
           return res.status(500).json({ error: "Internal Error" });
       }
-
-      if (error.request)
-        return res.status(500).json({ error: "SBHS Server Unreachable" });
-
+      return res.status(200).json({ data: await apiRes.json() });
+    } catch (e) {
+      console.log(e);
       return res.status(500).json({ error: "Internal Error" });
     }
   };

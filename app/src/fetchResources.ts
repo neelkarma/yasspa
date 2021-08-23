@@ -1,22 +1,24 @@
 import useSWR from "swr";
 
-/*
- * VALID API ENDPOINTS
- * -------------------
- *  - /api/terms
- *  - /api/dailynotices
- *  - /api/calendar
- *  - /api/today
- *  - /api/timetable
- *  - /api/awardscheme
- *  - /api/userinfo
- */
+type APIEndpoint =
+  | "/api/terms"
+  | "/api/dailynotices"
+  | "/api/calendar"
+  | "/api/today"
+  | "/api/timetable"
+  | "/api/awardscheme"
+  | "/api/userinfo";
 
 type WeekType = "A" | "B" | "C";
 type DayNumber = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7";
 type PeriodNumber = "1" | "2" | "3" | "4" | "5";
 type TermNumber = "1" | "2" | "3" | "4";
 type YearGroup = "7" | "8" | "9" | "10" | "11" | "12";
+
+interface Response<T> {
+  data: T;
+  error?: string | undefined;
+}
 
 interface Date {
   date: string;
@@ -265,37 +267,20 @@ interface UserInfo {
   groups: string[];
 }
 
-export const useTerms = (): { data: Terms; error: any } => {
-  const { data, error } = useSWR("/api/terms");
-  return { data, error };
+const apiFuncGenerator = <T>(
+  path: APIEndpoint
+): (() => { res: Response<T>; error: any }) => {
+  return () => {
+    const { data: res, error } = useSWR(path);
+    return { res, error };
+  };
 };
 
-export const useDailyNotices = (): { data: DailyNotices; error: any } => {
-  const { data, error } = useSWR("/api/dailynotices");
-  return { data, error };
-};
-
-export const useCalendar = (): { data: Calendar; error: any } => {
-  const { data, error } = useSWR("/api/calendar");
-  return { data, error };
-};
-
-export const useToday = (): { data: Today; error: any } => {
-  const { data, error } = useSWR("/api/today");
-  return { data, error };
-};
-
-export const useTimetable = (): { data: Timetable; error: any } => {
-  const { data, error } = useSWR("/api/timetable");
-  return { data, error };
-};
-
-export const useAwardScheme = (): { data: AwardScheme; error: any } => {
-  const { data, error } = useSWR("/api/awardscheme");
-  return { data, error };
-};
-
-export const useUserInfo = (): { data: UserInfo; error: any } => {
-  const { data, error } = useSWR("/api/userinfo");
-  return { data, error };
-};
+export const useTerms = apiFuncGenerator<Terms>("/api/terms");
+export const useDailyNotices =
+  apiFuncGenerator<DailyNotices>("/api/dailynotices");
+export const useCalendar = apiFuncGenerator<Calendar>("/api/calendar");
+export const useToday = apiFuncGenerator<Today>("/api/today");
+export const useTimetable = apiFuncGenerator<Timetable>("/api/timetable");
+export const useAwardScheme = apiFuncGenerator<AwardScheme>("/api/awardscheme");
+export const useUserInfo = apiFuncGenerator<UserInfo>("/api/userinfo");

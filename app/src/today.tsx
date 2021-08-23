@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Flex, Spacer, Heading, Text, HStack } from "@chakra-ui/react";
+import { useToday } from "./fetchResources";
 
 const Period: React.FC<{
   name: string;
@@ -69,6 +70,8 @@ const Break: React.FC<{
 };
 
 const Timetable: React.FC<{}> = () => {
+  // const { res, error } = useToday();
+  // if (!res) return null;
   return (
     <Box
       borderColor="gray.600"
@@ -84,7 +87,7 @@ const Timetable: React.FC<{}> = () => {
         <Heading fontSize="5rem">9:48:27</Heading>
       </Box>
       <Period
-        name="9W Music Adv"
+        name="9 Music Advanced 2...?"
         time="09:05"
         teacher="Ms R Miller"
         room="201"
