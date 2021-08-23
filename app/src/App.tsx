@@ -3,8 +3,9 @@ import { Box, VStack, Stack } from "@chakra-ui/react";
 import useSWR from "swr";
 import Landing from "./landing";
 import Loading from "./loading";
-import Timetable from "./timetable";
+import Today from "./today";
 import Filter from "./filter";
+import DailyNotices from "./dailynotices";
 
 const App: React.FC<{}> = () => {
   const { data } = useSWR("/auth/status");
@@ -17,9 +18,10 @@ const App: React.FC<{}> = () => {
         spacing={7}
         direction={{ md: "column", lg: "row" }}
       >
-        <Timetable />
+        <Today />
         <VStack w={{ md: undefined, lg: "100%" }}>
           <Filter onChange={() => null} />
+          <DailyNotices filter="change this sometime soon" />
         </VStack>
       </Stack>
     </Box>
