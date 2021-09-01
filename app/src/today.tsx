@@ -70,8 +70,9 @@ const Break: React.FC<{
 };
 
 const Timetable: React.FC<{}> = () => {
-  // const { res, error } = useToday();
-  // if (!res) return null;
+  const { res, error } = useToday();
+  if (!res) return null;
+  console.log(res);
   return (
     <Box
       borderColor="gray.600"
