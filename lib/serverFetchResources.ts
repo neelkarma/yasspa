@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Session } from "next-iron-session";
 import { auth } from "./auth";
-import fetch from "node-fetch";
 
 type sbhsAPIEndpoint =
   | "barcodenews/list.json"
