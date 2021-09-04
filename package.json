@@ -1,24 +1,38 @@
 {
   "name": "yasspa",
-  "private": true,
   "version": "0.1.0",
-  "description": "Yet another SBHS Student Portal alternative.",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "dev:app": "yarn workspace @yasspa/app dev",
-    "dev:server": "yarn workspace @yasspa/server dev",
-    "prod:app": "yarn workspace @yasspa/app build",
-    "prod:server": "yarn workspace @yasspa/server prod",
-    "lint:server": "yarn workspace @yasspa/server lint",
-    "format": "prettier -w \"./**/*.{ts,tsx,json,md}\""
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "workspaces": [
-    "app/",
-    "server/"
-  ],
-  "author": "chickensalt",
-  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "@chakra-ui/react": "^1.6.7",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@fontsource/inter": "^4.5.0",
+    "@fontsource/raleway": "^4.5.0",
+    "framer-motion": "^4",
+    "fuse.js": "^6.4.6",
+    "next": "11.1.2",
+    "next-iron-session": "^4.2.0",
+    "node-fetch": "^3.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.2.0",
+    "simple-oauth2": "^4.2.0",
+    "swr": "^1.0.0",
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
-    "prettier": "^2.3.2"
+    "@types/react": "17.0.19",
+    "@types/simple-oauth2": "^4.1.1",
+    "@types/uuid": "^8.3.1",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "prettier": "^2.3.2",
+    "typescript": "4.4.2"
   }
 }
