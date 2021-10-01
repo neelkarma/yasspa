@@ -25,6 +25,8 @@ const Period: React.FC<{
       px={3}
       py={4}
       borderRadius={10}
+      transitionDuration="100ms"
+      transitionTimingFunction="ease-out"
       _hover={{ backgroundColor: "gray.600" }}
     >
       <Box alignSelf="center">
@@ -58,7 +60,8 @@ const Break: React.FC<{
       fontSize="1.2rem"
       px={3}
       py={4}
-      animation="forwards 1s"
+      transitionDuration="100ms"
+      transitionTimingFunction="ease-out"
       borderRadius={10}
       _hover={{ backgroundColor: "gray.600" }}
     >

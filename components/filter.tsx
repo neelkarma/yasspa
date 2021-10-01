@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { IoFilterOutline } from "react-icons/io5";
 
 const Filter: React.FC<{
   onChange: (input: string) => void;
 }> = ({ onChange }) => {
-  const [input, setInput] = useState("");
-  useEffect(() => onChange(input), [input, onChange]);
   return (
     <InputGroup>
       <InputLeftElement pointerEvents="none">
@@ -15,8 +13,7 @@ const Filter: React.FC<{
       <Input
         variant="filled"
         placeholder="Filter"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
       />
     </InputGroup>
   );
