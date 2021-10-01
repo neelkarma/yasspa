@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       >
         <Today />
         <VStack w={{ md: undefined, lg: "100%" }}>
-          <Filter onChange={(input) => setFilter(input)} />
+          <Filter onChange={setFilter} />
           <Heading size="lg" textAlign="left" w="100%" pt={3}>
             Daily Notices
           </Heading>
