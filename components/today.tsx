@@ -10,6 +10,38 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { useToday } from "../lib/clientFetchResources";
+import type { Response, Today } from "../lib/clientFetchResources";
+
+const generatePeriodProps = (
+  res: Response<Today>,
+  period: 1 | 2 | 3 | 4 | 5
+) => ({
+  name: res.data.timetable.subjects[
+    `${
+      res.data.timetable.timetable.periods[
+        period.toString() as "1" | "2" | "3" | "4" | "5"
+      ].year
+    }${res.data.timetable.timetable.periods[period].title}`
+  ].title,
+  time: res.data.bells.find((val) => val.bell === period.toString())!.time,
+  teacher: res.data.timetable.timetable.periods[period].fullTeacher,
+  room: res.data.timetable.timetable.periods[period].room,
+  //TODO: Get these to work
+  isTimeChange: false,
+  isRoomChange: false,
+  isSub: false,
+});
+
+const generateBreakProps = (
+  res: Response<Today>,
+  type: "Recess" | "Lunch"
+) => ({
+  type,
+  time: res.data.bells.find(
+    (val) => val.bell === (type === "Recess" ? "Recess" : "Lunch 1")
+  )!.time,
+  isTimeChange: false, //TODO: Get this to work
+});
 
 const Period: React.FC<{
   name: string;
@@ -99,6 +131,9 @@ const Timetable: React.FC<{}> = () => {
       </Center>
     );
   console.log(res);
+  const recessIsFirst =
+    res.data.bells.findIndex((val) => val.bell === "Lunch 1") >
+    res.data.bells.findIndex((val) => val.bell === "Recess");
   return (
     <Box
       borderColor="gray.600"
@@ -113,34 +148,38 @@ const Timetable: React.FC<{}> = () => {
         <Heading>Roll Call in</Heading>
         <Heading fontSize="5rem">9:48:27</Heading>
       </Box>
-      <Period
-        name="9W Music Advanced"
-        time="09:05"
-        teacher="Ms R Miller"
-        room="201"
-      />
-      <Period name="9 Maths B" time="10:10" teacher="Bui" room="107" isSub />
-      <Break type="Lunch" time="11:10" />
-      <Period
-        name="9 Science 5"
-        time="11:50"
-        teacher="Ms A Karagiannis"
-        room="302"
-        isRoomChange
-      />
-      <Period
-        name="9 Values Ed 9"
-        time="12:55"
-        teacher="Mr R Boland"
-        room="802"
-      />
-      <Break type="Recess" time="13:55" />
-      <Period
-        name="9 English 5"
-        time="14:15"
-        teacher="Ms M Jollie"
-        room="801"
-      />
+      {res.data.timetable.timetable.routine
+        .split("")
+        .map((char, index, routine) => {
+          let firstBreakHasPassed =
+            index !== routine.findIndex((val) => val === "=");
+          switch (char) {
+            case "1":
+              return <Period {...generatePeriodProps(res, 1)} key={index} />;
+            case "2":
+              return <Period {...generatePeriodProps(res, 2)} key={index} />;
+            case "3":
+              return <Period {...generatePeriodProps(res, 3)} key={index} />;
+            case "4":
+              return <Period {...generatePeriodProps(res, 4)} key={index} />;
+            case "5":
+              return <Period {...generatePeriodProps(res, 5)} key={index} />;
+            case "=":
+              if (firstBreakHasPassed) {
+                return recessIsFirst ? (
+                  <Break {...generateBreakProps(res, "Lunch")} key={index} />
+                ) : (
+                  <Break {...generateBreakProps(res, "Recess")} key={index} />
+                );
+              }
+              firstBreakHasPassed = true;
+              return recessIsFirst ? (
+                <Break {...generateBreakProps(res, "Recess")} key={index} />
+              ) : (
+                <Break {...generateBreakProps(res, "Lunch")} key={index} />
+              );
+          }
+        })}
     </Box>
   );
 };

@@ -15,7 +15,7 @@ type PeriodNumber = "1" | "2" | "3" | "4" | "5";
 type TermNumber = "1" | "2" | "3" | "4";
 type YearGroup = "7" | "8" | "9" | "10" | "11" | "12";
 
-interface Response<T> {
+export interface Response<T> {
   data: T;
   error?: string | undefined;
 }
@@ -28,7 +28,7 @@ interface Date {
   dayNumber: DayNumber;
 }
 
-type Terms = {
+export type Terms = {
   [key in TermNumber]: {
     start: Date;
     end: Date;
@@ -42,7 +42,7 @@ type Terms = {
   };
 };
 
-interface DailyNotices {
+export interface DailyNotices {
   date: string;
   dayInfo: Date;
   dateYesterday: string;
@@ -110,12 +110,12 @@ interface PersonalEvent {
   timestart: number;
 }
 
-type Calendar = {
+export type Calendar = {
   info: Date;
   items: (SchoolEvent | AssessmentEvent | MoodleEvent | PersonalEvent)[];
 }[];
 
-interface Today {
+export interface Today {
   status: string;
   date: string;
   bells: {
@@ -126,6 +126,16 @@ interface Today {
     bellDisplay: string;
   }[];
   timetable: {
+    subjects: {
+      [key: string]: {
+        title: string;
+        shortTitle: string;
+        teacher: string;
+        subject: string;
+        fullTeacher: string;
+        year: YearGroup;
+      };
+    };
     timetable: {
       dayname: string;
       routine: string;
@@ -140,16 +150,6 @@ interface Today {
           teacher: string;
           fullTeacher: string;
           room: string;
-          year: YearGroup;
-        };
-      };
-      subjects: {
-        [key: string]: {
-          title: string;
-          shortTitle: string;
-          teacher: string;
-          subject: string;
-          fullTeacher: string;
           year: YearGroup;
         };
       };
@@ -179,7 +179,7 @@ interface Today {
   shouldDisplayVariations: boolean;
 }
 
-interface Timetable {
+export interface Timetable {
   student: {
     surname: string;
     givenname: string;
@@ -242,7 +242,7 @@ interface Timetable {
   advisor: string;
 }
 
-type AwardScheme = {
+export type AwardScheme = {
   year: string;
   activity: string;
   category: string;
@@ -251,7 +251,7 @@ type AwardScheme = {
   pointsCap: number;
 }[];
 
-interface UserInfo {
+export interface UserInfo {
   username: string;
   studentId: string;
   givenName: string;
