@@ -1,5 +1,14 @@
 import React from "react";
-import { Box, Flex, Spacer, Heading, Text, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Spacer,
+  Heading,
+  Text,
+  HStack,
+  Spinner,
+  Center,
+} from "@chakra-ui/react";
 import { useToday } from "../lib/clientFetchResources";
 
 const Period: React.FC<{
@@ -74,7 +83,20 @@ const Break: React.FC<{
 
 const Timetable: React.FC<{}> = () => {
   const { res, error } = useToday();
-  if (!res) return null;
+  if (!res)
+    return (
+      <Center
+        borderColor="gray.600"
+        borderWidth="1px"
+        borderRadius={15}
+        backgroundColor="gray.700"
+        h={{ sm: undefined, lg: "100%" }}
+        w={{ md: "100%", lg: "430px" }}
+        p={5}
+      >
+        <Spinner size="lg" />
+      </Center>
+    );
   console.log(res);
   return (
     <Box
