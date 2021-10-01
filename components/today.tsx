@@ -62,7 +62,8 @@ const Period: React.FC<{
 const Break: React.FC<{
   type: "Recess" | "Lunch";
   time: string;
-}> = ({ type, time }) => {
+  isTimeChange?: boolean;
+}> = ({ type, time, isTimeChange }) => {
   return (
     <Flex
       color="gray.400"
@@ -76,7 +77,7 @@ const Break: React.FC<{
     >
       <Text>{type}</Text>
       <Spacer />
-      <Text>{time}</Text>
+      <Text color={isTimeChange ? "blue.300" : undefined}>{time}</Text>
     </Flex>
   );
 };
@@ -113,7 +114,7 @@ const Timetable: React.FC<{}> = () => {
         <Heading fontSize="5rem">9:48:27</Heading>
       </Box>
       <Period
-        name="9 Music Advanced 2...?"
+        name="9W Music Advanced"
         time="09:05"
         teacher="Ms R Miller"
         room="201"
