@@ -6,6 +6,7 @@ import Loading from "../components/loading";
 import Today from "../components/today";
 import Filter from "../components/filter";
 import DailyNotices from "../components/dailynotices";
+import Head from "next/head";
 import { useState } from "react";
 
 const Home: NextPage = () => {
@@ -15,6 +16,9 @@ const Home: NextPage = () => {
   if (!data.authorized) return <Landing />;
   return (
     <Box p={5} h={{ md: undefined, lg: "100vh" }}>
+      <Head>
+        <title>YASSPA</title>
+      </Head>
       <Stack
         h={{ md: undefined, lg: "100%" }}
         spacing={7}

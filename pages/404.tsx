@@ -1,8 +1,12 @@
 import { Grid, Center, VStack, Heading, Text, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
+import Head from "next/head";
 import type { NextPage } from "next";
 const FourOhFour: NextPage = () => (
   <Grid minH="100vh">
+    <Head>
+      <title>404 | YASSPA</title>
+    </Head>
     <Center>
       <VStack spacing={5}>
         <Heading size="3xl">404</Heading>
