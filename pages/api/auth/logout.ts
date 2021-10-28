@@ -1,4 +1,4 @@
-import { withSession } from "../../../lib/session";
+import { withSession } from "lib/session";
 
 const handler = withSession((req, res) => {
   req.session.destroy();

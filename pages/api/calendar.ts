@@ -1,5 +1,5 @@
-import { fetchResource } from "../../lib/serverFetchResources";
-import { withSession } from "../../lib/session";
+import { fetchResource } from "lib/serverFetchResources";
+import { withSession } from "lib/session";
 
 const handler = withSession((req, res) => {
   fetchResource("diarycalendar/events.json", req, res, {

@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import { Box, VStack, Stack, Heading } from "@chakra-ui/react";
 import useSWR from "swr";
-import Landing from "../components/landing";
-import Loading from "../components/loading";
-import Today from "../components/today";
-import Filter from "../components/filter";
-import DailyNotices from "../components/dailynotices";
+import Landing from "components/landing";
+import Loading from "components/loading";
+import Today from "components/today";
+import Filter from "components/filter";
+import DailyNotices from "components/dailynotices";
 import Head from "next/head";
 import { useState } from "react";
 

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { auth } from "../../../lib/auth";
+import { auth } from "lib/auth";
 import { NIL } from "uuid";
 
 const handler = (_: NextApiRequest, res: NextApiResponse) => {

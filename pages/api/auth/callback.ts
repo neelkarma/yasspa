@@ -1,5 +1,5 @@
-import { withSession } from "../../../lib/session";
-import { auth } from "../../../lib/auth";
+import { withSession } from "lib/session";
+import { auth } from "lib/auth";
 
 const handler = withSession(async (req, res) => {
   try {

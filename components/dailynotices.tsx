@@ -14,7 +14,7 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import React from "react";
-import { useDailyNotices } from "../lib/clientFetchResources";
+import { useDailyNotices } from "lib/clientFetchResources";
 import Fuse from "fuse.js";
 
 const Notice: React.FC<{
@@ -22,29 +22,28 @@ const Notice: React.FC<{
   author: string;
   content: string;
   years: string;
-}> = ({ title, author, content, years }) => {
-  return (
-    <AccordionItem>
-      <AccordionButton>
-        <VStack>
-          <Text fontSize="1.3rem">{title}</Text>
-          <HStack>
-            <Tag colorScheme="cyan">{years}</Tag>
-            <Text color="gray.400">{author}</Text>
-          </HStack>
-        </VStack>
-        <Spacer />
-        <AccordionIcon fontSize={30} />
-      </AccordionButton>
-      <AccordionPanel
-        dangerouslySetInnerHTML={{ __html: content }}
-      ></AccordionPanel>
-    </AccordionItem>
-  );
-};
+}> = ({ title, author, content, years }) => (
+  <AccordionItem>
+    <AccordionButton>
+      <VStack>
+        <Text fontSize="1.3rem">{title}</Text>
+        <HStack>
+          <Tag colorScheme="cyan">{years}</Tag>
+          <Text color="gray.400">{author}</Text>
+        </HStack>
+      </VStack>
+      <Spacer />
+      <AccordionIcon fontSize={30} />
+    </AccordionButton>
+    <AccordionPanel
+      dangerouslySetInnerHTML={{ __html: content }}
+    ></AccordionPanel>
+  </AccordionItem>
+);
 
 const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
   const { res } = useDailyNotices();
+
   if (!res)
     return (
       <Center
@@ -58,6 +57,7 @@ const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         <Spinner />
       </Center>
     );
+
   if (res.data.notices.length <= 0)
     return (
       <Center
@@ -71,9 +71,11 @@ const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         <Text color="gray.500">No notices for today!</Text>
       </Center>
     );
+
   const fuse = new Fuse(res.data.notices, {
     keys: ["title", "authorName", "content", "displayYears"],
   });
+
   if (filter.length <= 0)
     return (
       <Box
@@ -97,6 +99,7 @@ const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         </Accordion>
       </Box>
     );
+
   const results = fuse.search(filter);
   if (results.length <= 0)
     return (
@@ -111,6 +114,7 @@ const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         <Text color="gray.500">No results.</Text>
       </Center>
     );
+
   return (
     <Box
       p={5}

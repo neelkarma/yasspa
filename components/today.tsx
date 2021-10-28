@@ -9,8 +9,8 @@ import {
   Spinner,
   Center,
 } from "@chakra-ui/react";
-import { useToday } from "../lib/clientFetchResources";
-import type { Response, Today } from "../lib/clientFetchResources";
+import { useToday } from "lib/clientFetchResources";
+import type { Response, Today } from "lib/clientFetchResources";
 
 const generatePeriodProps = (
   res: Response<Today>,

@@ -1,5 +1,5 @@
-import { auth } from "../../../lib/auth";
-import { withSession } from "../../../lib/session";
+import { auth } from "lib/auth";
+import { withSession } from "lib/session";
 
 const handler = withSession((req, res) => {
   const sessionToken = req.session.get("token");
