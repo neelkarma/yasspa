@@ -36,7 +36,9 @@ const Notice: React.FC<{
         <Spacer />
         <AccordionIcon fontSize={30} />
       </AccordionButton>
-      <AccordionPanel>{content}</AccordionPanel>
+      <AccordionPanel
+        dangerouslySetInnerHTML={{ __html: content }}
+      ></AccordionPanel>
     </AccordionItem>
   );
 };
