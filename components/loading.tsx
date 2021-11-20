@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Grid, Center, Spinner } from "@chakra-ui/react";
 
-const Loading: React.FC<{}> = () => (
+export const Loading: React.FC<{}> = () => (
   <Box>
     <Grid minH="100vh">
       <Center>
@@ -10,5 +10,3 @@ const Loading: React.FC<{}> = () => (
     </Grid>
   </Box>
 );
-
-export default Loading;

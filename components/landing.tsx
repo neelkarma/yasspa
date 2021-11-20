@@ -10,7 +10,7 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 
-const Landing: React.FC<{}> = () => (
+export const Landing: React.FC<{}> = () => (
   <Grid minH="100vh">
     <Center>
       <VStack spacing={5}>
@@ -36,5 +36,3 @@ const Landing: React.FC<{}> = () => (
     </Center>
   </Grid>
 );
-
-export default Landing;

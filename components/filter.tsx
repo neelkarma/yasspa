@@ -1,8 +1,7 @@
-import React from "react";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { IoFilterOutline } from "react-icons/io5";
 
-const Filter: React.FC<{
+export const Filter: React.FC<{
   onChange: (input: string) => void;
 }> = ({ onChange }) => (
   <InputGroup>
@@ -16,5 +15,3 @@ const Filter: React.FC<{
     />
   </InputGroup>
 );
-
-export default Filter;

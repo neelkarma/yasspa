@@ -1,47 +1,9 @@
-import {
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
-  HStack,
-  VStack,
-  Text,
-  Tag,
-  Accordion,
-  AccordionIcon,
-  Center,
-  Box,
-  Spinner,
-  Spacer,
-} from "@chakra-ui/react";
-import React from "react";
+import { Text, Accordion, Center, Box, Spinner } from "@chakra-ui/react";
+import { Notice } from "./notice";
 import { useDailyNotices } from "lib/clientFetchResources";
 import Fuse from "fuse.js";
 
-const Notice: React.FC<{
-  title: string;
-  author: string;
-  content: string;
-  years: string;
-}> = ({ title, author, content, years }) => (
-  <AccordionItem>
-    <AccordionButton>
-      <VStack>
-        <Text fontSize="1.3rem">{title}</Text>
-        <HStack>
-          <Tag colorScheme="cyan">{years}</Tag>
-          <Text color="gray.400">{author}</Text>
-        </HStack>
-      </VStack>
-      <Spacer />
-      <AccordionIcon fontSize={30} />
-    </AccordionButton>
-    <AccordionPanel
-      dangerouslySetInnerHTML={{ __html: content }}
-    ></AccordionPanel>
-  </AccordionItem>
-);
-
-const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
+export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
   const { res } = useDailyNotices();
 
   if (!res)
@@ -138,5 +100,3 @@ const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
     </Box>
   );
 };
-
-export default DailyNotices;
