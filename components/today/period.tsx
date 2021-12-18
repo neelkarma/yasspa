@@ -12,7 +12,7 @@ export const Period: React.FC<{
           `${data.timetable.timetable.periods[period].year}${data.timetable.timetable.periods[period].title}`
         ].title
       }
-      time={data.bells.find((val) => val.bell === period.toString())!.time}
+      time={data.bells.find((val) => val.period === period.toString())!.time}
       teacher={data.timetable.timetable.periods[period].fullTeacher}
       room={data.timetable.timetable.periods[period].room}
       //TODO: Get these to work
