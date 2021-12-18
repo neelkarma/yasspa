@@ -1,6 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { Today, Bell } from "lib/clientFetchResources";
-import next from "next";
 import { FC, useEffect, useState } from "react";
 
 export const Countdown: FC<{ data: Today }> = ({ data }) => {

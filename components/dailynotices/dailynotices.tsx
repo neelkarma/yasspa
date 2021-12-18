@@ -10,7 +10,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
     return (
       <Center
         w="100%"
-        h="50%"
+        h="10rem"
         backgroundColor="gray.700"
         borderColor="gray.600"
         borderRadius={15}

@@ -1,4 +1,4 @@
-import { Box, Heading, Spinner, Center } from "@chakra-ui/react";
+import { Box, Spinner, Center } from "@chakra-ui/react";
 import { useToday } from "lib/clientFetchResources";
 import { Period } from "./period";
 import { Break } from "./break";
@@ -14,16 +14,12 @@ export const Today: React.FC<{}> = () => {
         borderRadius={15}
         backgroundColor="gray.700"
         h={{ sm: undefined, lg: "100%" }}
-        w={{ md: "100%", lg: "430px" }}
         p={5}
       >
         <Spinner size="lg" />
       </Center>
     );
   console.log(res);
-  const recessIsFirst =
-    res.data.bells.findIndex((val) => val.period === "MTL1") >
-    res.data.bells.findIndex((val) => val.period === "R");
   return (
     <Box
       className="hide-scrollbar"
@@ -32,8 +28,7 @@ export const Today: React.FC<{}> = () => {
       borderRadius={15}
       overflowY="scroll"
       backgroundColor="gray.700"
-      h={{ sm: undefined, lg: "100%" }}
-      w={{ md: "100%", lg: "430px" }}
+      w={{ md: "100%", lg: "30rem" }}
       p={5}
     >
       <Countdown data={res.data} />

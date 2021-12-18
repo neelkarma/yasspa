@@ -27,6 +27,7 @@ export const PureBreak: React.FC<{
 }> = ({ display: type, time, isTimeChange }) => {
   return (
     <Flex
+      w="100%"
       color="gray.400"
       fontSize="1.2rem"
       px={3}

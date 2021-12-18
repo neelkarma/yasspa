@@ -42,7 +42,7 @@ export const PurePeriod: React.FC<{
 }) => {
   return (
     <Flex
-      width="100%"
+      w="100%"
       px={3}
       py={4}
       borderRadius={10}
