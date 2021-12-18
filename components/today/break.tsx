@@ -3,26 +3,28 @@ import type { Today } from "lib/clientFetchResources";
 
 export const Break: React.FC<{
   data: Today;
-  type: "Recess" | "Lunch";
+  type: "R" | "MTL1" | "MTL2";
 }> = ({ data, type }) => {
   return (
     <PureBreak
-      type={type}
-      time={
-        data.bells.find(
-          (val) => val.bell === (type === "Recess" ? "Recess" : "Lunch 1")
-        )!.time
+      display={
+        {
+          R: "Recess",
+          MTL1: "Lunch 1",
+          MTL2: "Lunch 2",
+        }[type]
       }
+      time={data.bells.find((val) => val.period === type)!.time}
       isTimeChange={false} //TODO: Get this to work
     />
   );
 };
 
 export const PureBreak: React.FC<{
-  type: "Recess" | "Lunch";
+  display: string;
   time: string;
   isTimeChange?: boolean;
-}> = ({ type, time, isTimeChange }) => {
+}> = ({ display: type, time, isTimeChange }) => {
   return (
     <Flex
       color="gray.400"

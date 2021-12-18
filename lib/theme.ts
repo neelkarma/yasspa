@@ -7,7 +7,7 @@ export default extendTheme({
   },
   fonts: {
     body: "Inter",
-    heading: "Raleway",
+    heading: "Roboto",
   },
   components: {
     Button: {

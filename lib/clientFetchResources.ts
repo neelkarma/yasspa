@@ -115,16 +115,18 @@ export type Calendar = {
   items: (SchoolEvent | AssessmentEvent | MoodleEvent | PersonalEvent)[];
 }[];
 
+export interface Bell {
+  period: string;
+  time: string;
+  reasonShort: string;
+  reason: string;
+  bellDisplay: string;
+}
+
 export interface Today {
   status: string;
   date: string;
-  bells: {
-    bell: string;
-    time: string;
-    reasonShort: string;
-    reason: string;
-    bellDisplay: string;
-  }[];
+  bells: Bell[];
   timetable: {
     subjects: {
       [key: string]: {

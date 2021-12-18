@@ -10,29 +10,29 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.6.10",
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
-    "@fontsource/inter": "^4.5.0",
-    "@fontsource/raleway": "^4.5.0",
+    "@chakra-ui/react": "^1.7.3",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@fontsource/inter": "^4.5.1",
+    "@fontsource/roboto": "^4.5.1",
     "framer-motion": "^4.1.17",
     "fuse.js": "^6.4.6",
-    "next": "^12.0.1",
+    "next": "^12.0.7",
     "next-iron-session": "^4.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
-    "simple-oauth2": "^4.2.0",
-    "swr": "^1.0.1",
+    "simple-oauth2": "^4.3.0",
+    "swr": "^1.1.2-beta.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/react": "17.0.33",
+    "@types/react": "17.0.37",
     "@types/simple-oauth2": "^4.1.1",
-    "@types/uuid": "^8.3.1",
-    "eslint": "<8.0.0",
-    "eslint-config-next": "12.0.0",
-    "prettier": "^2.4.1",
-    "typescript": "4.4.4"
+    "@types/uuid": "^8.3.3",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "12.0.7",
+    "prettier": "^2.5.1",
+    "typescript": "4.5.4"
   }
 }
