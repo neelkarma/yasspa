@@ -59,7 +59,7 @@ export const PurePeriod: React.FC<{
           <Text color={isSub ? "blue.300" : "gray.400"}>{teacher}</Text>
         </HStack>
       </Box>
-      <Spacer />
+      <Spacer minW="12px" />
       <Text
         color={isRoomChange ? "blue.300" : undefined}
         fontSize="1.2rem"

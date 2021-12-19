@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, VStack, Stack, Heading } from "@chakra-ui/react";
+import { Box, VStack, Stack, Heading, HStack, Text } from "@chakra-ui/react";
 import useSWR from "swr";
 import Head from "next/head";
 
@@ -8,6 +8,7 @@ import { Loading } from "components/loading";
 import { Today } from "components/today/today";
 import { Filter } from "components/filter";
 import { DailyNotices } from "components/dailynotices/dailynotices";
+import { AvatarMenu } from "components/menu";
 
 import type { NextPage } from "next";
 
@@ -28,11 +29,17 @@ const Home: NextPage = () => {
       >
         <Today />
         <VStack w={{ md: undefined, lg: "100%" }}>
-          <Filter onChange={setFilter} />
+          <HStack w="100%">
+            <Filter onChange={setFilter} />
+            <AvatarMenu />
+          </HStack>
           <Heading size="lg" textAlign="left" w="100%" pt={3}>
             Daily Notices
           </Heading>
           <DailyNotices filter={filter} />
+          <Text color="gray.600" pt={5} pb={10} fontWeight="bold" fontSize="xl">
+            You&apos;ve reached the end of the feed!
+          </Text>
         </VStack>
       </Stack>
     </Box>

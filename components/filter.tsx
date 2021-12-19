@@ -1,7 +1,8 @@
+import { FC } from "react";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { IoFilterOutline } from "react-icons/io5";
 
-export const Filter: React.FC<{
+export const Filter: FC<{
   onChange: (input: string) => void;
 }> = ({ onChange }) => (
   <InputGroup>

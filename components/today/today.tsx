@@ -14,6 +14,7 @@ export const Today: React.FC<{}> = () => {
         borderRadius={15}
         backgroundColor="gray.700"
         h={{ sm: undefined, lg: "100%" }}
+        w={{ md: "100%", lg: "32rem" }}
         p={5}
       >
         <Spinner size="lg" />
@@ -28,7 +29,7 @@ export const Today: React.FC<{}> = () => {
       borderRadius={15}
       overflowY="scroll"
       backgroundColor="gray.700"
-      w={{ md: "100%", lg: "30rem" }}
+      w={{ md: "100%", lg: "32rem" }}
       p={5}
     >
       <Countdown data={res.data} />

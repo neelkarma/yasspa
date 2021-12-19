@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Button } from "@chakra-ui/button";
 import {
   Center,
@@ -10,7 +10,7 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 
-export const Landing: React.FC<{}> = () => (
+export const Landing: FC<{}> = () => (
   <Grid minH="100vh">
     <Center>
       <VStack spacing={5}>

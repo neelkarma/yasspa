@@ -3,7 +3,7 @@ import "@fontsource/roboto";
 import "../styles.css";
 import { SWRConfig } from "swr";
 import { ChakraProvider } from "@chakra-ui/react";
-import theme from "lib/theme";
+import { theme } from "lib/theme";
 import type { AppProps } from "next/app";
 
 const App = ({ Component, pageProps }: AppProps) => (
