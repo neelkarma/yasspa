@@ -1,12 +1,14 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { Today, Bell } from "lib/clientFetchResources";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
+import Head from "next/head";
 
 export const Countdown: FC<{ data: Today }> = ({ data }) => {
   const [countdown, setCountdown] = useState(0);
   const [display, setDisplay] = useState("Loading...");
+  const [nextBell, setNextBell] = useState<Bell | null>();
 
-  const initCountdown = () => {
+  const updateNextBell = useCallback(() => {
     const now = Date.now();
     let nextBell: Bell;
     let nextBellDiff = Infinity;
@@ -23,7 +25,19 @@ export const Countdown: FC<{ data: Today }> = ({ data }) => {
         nextBell = bell;
       }
     }
-    console.log(nextBell!.period);
+    setNextBell(nextBell!);
+  }, [data.bells, data.date]);
+
+  const tick = useCallback(() => {
+    if (!nextBell) return updateNextBell();
+
+    const now = Date.now();
+    const [hours, minutes] = nextBell!.time.split(":");
+    const bellDate = new Date(data.date);
+    bellDate.setHours(Number(hours));
+    bellDate.setMinutes(Number(minutes));
+    const diff = bellDate.getTime() - now;
+
     if (nextBell!.period === "RC") {
       setDisplay("Roll Call");
     } else {
@@ -35,10 +49,16 @@ export const Countdown: FC<{ data: Today }> = ({ data }) => {
         ].title
       );
     }
-    setCountdown(Math.floor(nextBellDiff / 1000));
-  };
+    setCountdown(Math.floor(diff / 1000));
+  }, [
+    data.date,
+    data.timetable.subjects,
+    data.timetable.timetable.periods,
+    nextBell,
+    updateNextBell,
+  ]);
 
-  const getHMS = () => {
+  const getHMS = useCallback(() => {
     const seconds = countdown % 60;
     const minutes = Math.floor((countdown / 60) % 60);
     const hours = Math.floor(countdown / 60 / 60);
@@ -46,23 +66,22 @@ export const Countdown: FC<{ data: Today }> = ({ data }) => {
     const minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
     const hoursString = hours < 10 ? `0${hours}` : hours.toString();
     return [hoursString, minutesString, secondsString].join(":");
-  };
+  }, [countdown]);
 
-  useEffect(initCountdown, [
-    data.bells,
-    data.date,
-    data.timetable.subjects,
-    data.timetable.timetable.periods,
-  ]);
+  useEffect(tick, [tick]);
+
   useEffect(() => {
-    const interval = setInterval(() => setCountdown((x) => x - 1), 1000);
+    const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   });
 
-  if (countdown < 0) initCountdown();
-
   return (
     <Box py={10} textAlign="center" fontWeight="extrabold">
+      <Head>
+        <title>
+          {getHMS()} until {display} | YASSPA
+        </title>
+      </Head>
       <Heading fontSize="2rem">{display} in</Heading>
       <Heading fontSize="3rem">{getHMS()}</Heading>
     </Box>

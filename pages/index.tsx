@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Box, VStack, Stack, Heading, HStack, Text } from "@chakra-ui/react";
 import useSWR from "swr";
-import Head from "next/head";
 
 import { Landing } from "components/landing";
 import { Loading } from "components/loading";
@@ -19,9 +18,6 @@ const Home: NextPage = () => {
   if (!data.authorized) return <Landing />;
   return (
     <Box p={5} h={{ md: undefined, lg: "100vh" }}>
-      <Head>
-        <title>YASSPA</title>
-      </Head>
       <Stack
         h={{ md: undefined, lg: "100%" }}
         spacing={7}
