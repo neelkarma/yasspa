@@ -6,7 +6,7 @@ import { Countdown } from "./countdown";
 import { useCardColors } from "lib/theme";
 
 export const Today: React.FC<{}> = () => {
-  const { res, error } = useToday();
+  const { res } = useToday();
   const cardStyles = useCardColors();
   if (!res)
     return (

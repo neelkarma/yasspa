@@ -1,11 +1,4 @@
-import {
-  Flex,
-  Box,
-  Text,
-  HStack,
-  Spacer,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Flex, Box, Text, HStack, Spacer } from "@chakra-ui/react";
 import type { Today } from "lib/clientFetchResources";
 import { useCardHoverColor, useMutedTextColor } from "lib/theme";
 

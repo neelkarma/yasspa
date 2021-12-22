@@ -9,13 +9,7 @@ import {
   MenuDivider,
   useColorMode,
 } from "@chakra-ui/react";
-import {
-  IoPerson,
-  IoLogOut,
-  IoLogoGithub,
-  IoSunny,
-  IoMoon,
-} from "react-icons/io5";
+import { IoLogOut, IoLogoGithub, IoSunny, IoMoon } from "react-icons/io5";
 import { FC } from "react";
 import { useUserInfo } from "lib/clientFetchResources";
 

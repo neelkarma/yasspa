@@ -1,4 +1,4 @@
-import { Text, Accordion, Center, Box, Spinner } from "@chakra-ui/react";
+import { Center, Box, Spinner } from "@chakra-ui/react";
 import { useUserInfo } from "lib/clientFetchResources";
 import { useCardColors } from "lib/theme";
 

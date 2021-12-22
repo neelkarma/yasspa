@@ -5,7 +5,6 @@ import {
   Stack,
   Heading,
   HStack,
-  Text,
   Grid,
   GridItem,
 } from "@chakra-ui/react";
