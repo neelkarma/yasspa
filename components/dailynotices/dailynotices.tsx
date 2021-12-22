@@ -2,17 +2,19 @@ import { Text, Accordion, Center, Box, Spinner } from "@chakra-ui/react";
 import { Notice } from "./notice";
 import { useDailyNotices } from "lib/clientFetchResources";
 import Fuse from "fuse.js";
+import { useCardColors, useMutedTextColor } from "lib/theme";
 
 export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
   const { res } = useDailyNotices();
+  const cardStyles = useCardColors();
+  const mutedTextColor = useMutedTextColor();
 
   if (!res)
     return (
       <Center
         w="100%"
         h="100%"
-        backgroundColor="gray.700"
-        borderColor="gray.600"
+        {...cardStyles}
         borderRadius={15}
         borderWidth="1px"
       >
@@ -27,11 +29,10 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         borderRadius={10}
         w="100%"
         h="100%"
-        backgroundColor="gray.700"
-        borderColor="gray.600"
+        {...cardStyles}
         borderWidth="1px"
       >
-        <Text color="gray.500">No notices for today!</Text>
+        <Text color={mutedTextColor}>No notices for today!</Text>
       </Center>
     );
 
@@ -45,8 +46,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         p={5}
         w="100%"
         h="100%"
-        backgroundColor="gray.700"
-        borderColor="gray.600"
+        {...cardStyles}
         borderRadius={15}
         borderWidth="1px"
       >
@@ -72,8 +72,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         borderRadius={10}
         w="100%"
         h="100%"
-        backgroundColor="gray.700"
-        borderColor="gray.600"
+        {...cardStyles}
         borderWidth="1px"
       >
         <Text color="gray.500">No results.</Text>
@@ -85,8 +84,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
       p={5}
       w="100%"
       h="100%"
-      backgroundColor="gray.700"
-      borderColor="gray.600"
+      {...cardStyles}
       borderRadius={15}
       borderWidth="1px"
     >

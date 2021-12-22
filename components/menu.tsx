@@ -7,13 +7,21 @@ import {
   Spinner,
   Center,
   MenuDivider,
+  useColorMode,
 } from "@chakra-ui/react";
-import { IoPerson, IoLogOut, IoLogoGithub } from "react-icons/io5";
+import {
+  IoPerson,
+  IoLogOut,
+  IoLogoGithub,
+  IoSunny,
+  IoMoon,
+} from "react-icons/io5";
 import { FC } from "react";
 import { useUserInfo } from "lib/clientFetchResources";
 
 export const AvatarMenu: FC<{}> = () => {
   const { res, error } = useUserInfo();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Menu>
@@ -31,6 +39,19 @@ export const AvatarMenu: FC<{}> = () => {
         )}
       </MenuButton>
       <MenuList>
+        <MenuItem onClick={toggleColorMode}>
+          {colorMode === "light" ? (
+            <IoMoon
+              style={{
+                fontSize: "1.2rem",
+                marginRight: "10px",
+              }}
+            />
+          ) : (
+            <IoSunny style={{ fontSize: "1.2rem", marginRight: "10px" }} />
+          )}
+          <span>{colorMode === "light" ? "Dark Mode" : "Light Mode"}</span>
+        </MenuItem>
         {/* eslint-disable-next-line */}
         <a href="/api/auth/logout">
           <MenuItem>

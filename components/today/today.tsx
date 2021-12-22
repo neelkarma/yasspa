@@ -3,16 +3,17 @@ import { useToday } from "lib/clientFetchResources";
 import { Period } from "./period";
 import { Break } from "./break";
 import { Countdown } from "./countdown";
+import { useCardColors } from "lib/theme";
 
 export const Today: React.FC<{}> = () => {
   const { res, error } = useToday();
+  const cardStyles = useCardColors();
   if (!res)
     return (
       <Center
-        borderColor="gray.600"
         borderWidth="1px"
         borderRadius={15}
-        backgroundColor="gray.700"
+        {...cardStyles}
         h={{ sm: undefined, lg: "100%" }}
         w={{ md: "100%", lg: "32rem" }}
         p={5}
@@ -24,11 +25,10 @@ export const Today: React.FC<{}> = () => {
   return (
     <Box
       className="hide-scrollbar"
-      borderColor="gray.600"
       borderWidth="1px"
       borderRadius={15}
       overflowY="scroll"
-      backgroundColor="gray.700"
+      {...cardStyles}
       w={{ md: "100%", lg: "32rem" }}
       p={5}
     >

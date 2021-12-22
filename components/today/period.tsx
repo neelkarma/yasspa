@@ -1,5 +1,13 @@
-import { Flex, Box, Text, HStack, Spacer } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Text,
+  HStack,
+  Spacer,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import type { Today } from "lib/clientFetchResources";
+import { useCardHoverColor, useMutedTextColor } from "lib/theme";
 
 export const Period: React.FC<{
   data: Today;
@@ -40,6 +48,9 @@ export const PurePeriod: React.FC<{
   isRoomChange,
   isSub,
 }) => {
+  const mutedTextColor = useMutedTextColor();
+  const cardHoverColor = useCardHoverColor();
+
   return (
     <Flex
       w="100%"
@@ -48,15 +59,15 @@ export const PurePeriod: React.FC<{
       borderRadius={10}
       transitionDuration="100ms"
       transitionTimingFunction="ease-out"
-      _hover={{ backgroundColor: "gray.600" }}
+      _hover={{ backgroundColor: cardHoverColor }}
     >
       <Box alignSelf="center">
         <Text fontSize="1.3rem">{className}</Text>
         <HStack spacing={1} fontWeight="light">
           <Text>at</Text>
           <Text color={isTimeChange ? "blue.300" : undefined}>{time}</Text>
-          <Text color="gray.400">with</Text>
-          <Text color={isSub ? "blue.300" : "gray.400"}>{teacher}</Text>
+          <Text color={mutedTextColor}>with</Text>
+          <Text color={isSub ? "blue.300" : mutedTextColor}>{teacher}</Text>
         </HStack>
       </Box>
       <Spacer minW="12px" />

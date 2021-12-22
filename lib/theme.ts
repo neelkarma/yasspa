@@ -1,9 +1,8 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, useColorModeValue } from "@chakra-ui/react";
 
 export const theme = extendTheme({
   config: {
     initialColorMode: "dark",
-    useSystemColorMode: false,
   },
   fonts: {
     body: "Inter",
@@ -20,3 +19,21 @@ export const theme = extendTheme({
     },
   },
 });
+
+export const useCardColors = () =>
+  useColorModeValue(
+    {
+      backgroundColor: "gray.100",
+      borderColor: "gray.200",
+    },
+    {
+      backgroundColor: "gray.700",
+      borderColor: "gray.600",
+    }
+  );
+
+export const useMutedTextColor = () =>
+  useColorModeValue("gray.400", "gray.500");
+
+export const useCardHoverColor = () =>
+  useColorModeValue("gray.200", "gray.600");

@@ -1,5 +1,6 @@
-import { Flex, Text, Spacer } from "@chakra-ui/react";
+import { Flex, Text, Spacer, useColorModeValue } from "@chakra-ui/react";
 import type { Today } from "lib/clientFetchResources";
+import { useCardHoverColor, useMutedTextColor } from "lib/theme";
 
 export const Break: React.FC<{
   data: Today;
@@ -25,17 +26,19 @@ export const PureBreak: React.FC<{
   time: string;
   isTimeChange?: boolean;
 }> = ({ display: type, time, isTimeChange }) => {
+  const mutedTextColor = useMutedTextColor();
+  const cardHoverColor = useCardHoverColor();
   return (
     <Flex
       w="100%"
-      color="gray.400"
+      color={mutedTextColor}
       fontSize="1.2rem"
       px={3}
       py={4}
       transitionDuration="100ms"
       transitionTimingFunction="ease-out"
       borderRadius={10}
-      _hover={{ backgroundColor: "gray.600" }}
+      _hover={{ backgroundColor: cardHoverColor }}
     >
       <Text>{type}</Text>
       <Spacer />
