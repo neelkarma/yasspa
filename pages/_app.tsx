@@ -1,5 +1,4 @@
 import "@fontsource/inter";
-import "@fontsource/roboto";
 import "../styles.css";
 import { SWRConfig } from "swr";
 import { ChakraProvider } from "@chakra-ui/react";

@@ -7,7 +7,7 @@ export const theme = extendTheme({
   },
   fonts: {
     body: "Inter",
-    heading: "Roboto",
+    heading: "Inter",
   },
   components: {
     Button: {

@@ -10,7 +10,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
     return (
       <Center
         w="100%"
-        h="10rem"
+        h="100%"
         backgroundColor="gray.700"
         borderColor="gray.600"
         borderRadius={15}
@@ -26,6 +26,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         py={10}
         borderRadius={10}
         w="100%"
+        h="100%"
         backgroundColor="gray.700"
         borderColor="gray.600"
         borderWidth="1px"
@@ -43,6 +44,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
       <Box
         p={5}
         w="100%"
+        h="100%"
         backgroundColor="gray.700"
         borderColor="gray.600"
         borderRadius={15}
@@ -69,6 +71,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         py={10}
         borderRadius={10}
         w="100%"
+        h="100%"
         backgroundColor="gray.700"
         borderColor="gray.600"
         borderWidth="1px"
@@ -81,6 +84,7 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
     <Box
       p={5}
       w="100%"
+      h="100%"
       backgroundColor="gray.700"
       borderColor="gray.600"
       borderRadius={15}

@@ -1,7 +1,7 @@
 import { withSession } from "lib/session";
 import { auth } from "lib/auth";
 
-const handler = withSession(async (req, res) => {
+export default withSession(async (req, res) => {
   try {
     const token = await auth.getToken({
       code: req.query.code as string,
@@ -15,5 +15,3 @@ const handler = withSession(async (req, res) => {
     res.status(500).json({ error: "The SBHS server fucked up" });
   }
 });
-
-export default handler;

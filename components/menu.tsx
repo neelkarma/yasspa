@@ -6,8 +6,9 @@ import {
   MenuList,
   Spinner,
   Center,
+  MenuDivider,
 } from "@chakra-ui/react";
-import { IoPerson, IoLogOut } from "react-icons/io5";
+import { IoPerson, IoLogOut, IoLogoGithub } from "react-icons/io5";
 import { FC } from "react";
 import { useUserInfo } from "lib/clientFetchResources";
 
@@ -30,15 +31,6 @@ export const AvatarMenu: FC<{}> = () => {
         )}
       </MenuButton>
       <MenuList>
-        <MenuItem>
-          <IoPerson
-            style={{
-              fontSize: "1.2rem",
-              marginRight: "10px",
-            }}
-          />
-          <span>Profile</span>
-        </MenuItem>
         {/* eslint-disable-next-line */}
         <a href="/api/auth/logout">
           <MenuItem>
@@ -49,6 +41,18 @@ export const AvatarMenu: FC<{}> = () => {
               }}
             />
             <span>Log Out</span>
+          </MenuItem>
+        </a>
+        <MenuDivider />
+        <a href="https://www.github.com/neelkarma/yasspa">
+          <MenuItem>
+            <IoLogoGithub
+              style={{
+                fontSize: "1.2rem",
+                marginRight: "10px",
+              }}
+            />
+            <span>Source</span>
           </MenuItem>
         </a>
       </MenuList>

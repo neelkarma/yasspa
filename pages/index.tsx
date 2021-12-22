@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { Box, VStack, Stack, Heading, HStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  VStack,
+  Stack,
+  Heading,
+  HStack,
+  Text,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import useSWR from "swr";
 
 import { Landing } from "components/landing";
@@ -8,6 +17,8 @@ import { Today } from "components/today/today";
 import { Filter } from "components/filter";
 import { DailyNotices } from "components/dailynotices/dailynotices";
 import { AvatarMenu } from "components/menu";
+import { Barcode } from "components/barcode/barcode";
+import { Profile } from "components/profile/profile";
 
 import type { NextPage } from "next";
 
@@ -25,17 +36,42 @@ const Home: NextPage = () => {
       >
         <Today />
         <VStack w={{ md: undefined, lg: "100%" }}>
-          <HStack w="100%">
+          <HStack w="100%" mb={2}>
             <Filter onChange={setFilter} />
             <AvatarMenu />
           </HStack>
-          <Heading size="lg" textAlign="left" w="100%" pt={3}>
-            Daily Notices
-          </Heading>
-          <DailyNotices filter={filter} />
-          <Text color="gray.600" pt={5} pb={10} fontWeight="bold" fontSize="xl">
-            You&apos;ve reached the end of the feed!
-          </Text>
+          <Grid
+            templateRows="repeat(2, 1fr)"
+            templateColumns="repeate(2, 1fr)"
+            w="100%"
+            h="100%"
+            gap={5}
+          >
+            <GridItem colSpan={2}>
+              <VStack h="100%">
+                <Heading size="lg" textAlign="left" w="100%">
+                  Daily Notices
+                </Heading>
+                <DailyNotices filter={filter} />
+              </VStack>
+            </GridItem>
+            <GridItem>
+              <VStack h="100%">
+                <Heading size="lg" textAlign="left" w="100%">
+                  Barcode
+                </Heading>
+                <Barcode />
+              </VStack>
+            </GridItem>
+            <GridItem>
+              <VStack h="100%">
+                <Heading size="lg" textAlign="left" w="100%">
+                  Profile
+                </Heading>
+                <Profile />
+              </VStack>
+            </GridItem>
+          </Grid>
         </VStack>
       </Stack>
     </Box>
