@@ -31,6 +31,8 @@ export const PeriodLabel: FC<{
           transitionTimingFunction="ease-out"
           textAlign="center"
           borderRadius="5px"
+          cursor="pointer"
+          userSelect="none"
         >
           {short}
         </GridItem>
