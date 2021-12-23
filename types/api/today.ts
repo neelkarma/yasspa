@@ -13,24 +13,18 @@ export interface Bell {
   period: string;
   startTime: string;
   endTime: null | string;
-  type: Type;
+  type: string;
   time: string;
   bell: string;
   bellDisplay: string;
 }
 
-enum Type {
-  O = "O",
-  R = "R",
-  T = "T",
-}
-
-interface TodayTimetable {
+export interface TodayTimetable {
   timetable: TimetableTimetable;
   subjects: { [key: string]: Subject };
 }
 
-interface Subject {
+export interface Subject {
   title: string;
   shortTitle: string;
   teacher: null | string;
@@ -40,7 +34,7 @@ interface Subject {
   colour: string;
 }
 
-interface TimetableTimetable {
+export interface TimetableTimetable {
   dayname: string;
   routine: string;
   rollcall: Rollcall;
@@ -48,16 +42,16 @@ interface TimetableTimetable {
   dayNumber: string;
 }
 
-interface Periods {
-  "1": The1;
-  "2": The1;
-  "3": The1;
-  "4": The1;
-  "5": The1;
+export interface Periods {
+  "1": Period;
+  "2": Period;
+  "3": Period;
+  "4": Period;
+  "5": Period;
   RC: Rollcall;
 }
 
-interface The1 {
+export interface Period {
   title: string;
   teacher: string;
   room: string;
@@ -65,7 +59,7 @@ interface The1 {
   year: string;
 }
 
-interface Rollcall {
+export interface Rollcall {
   title: string;
   teacher: string;
   room: null;

@@ -1,4 +1,4 @@
-interface SchoolEvent {
+export interface SchoolEvent {
   type: "school";
   index: number;
   user: string;
@@ -10,7 +10,7 @@ interface SchoolEvent {
   notes: string;
 }
 
-interface AssessmentEvent {
+export interface AssessmentEvent {
   type: "assessment";
   subtype:
     | "assignment"
@@ -26,7 +26,7 @@ interface AssessmentEvent {
   timeTo: string;
 }
 
-interface MoodleEvent {
+export interface MoodleEvent {
   type: "moodle";
   subtype: string;
   modulename: string;
@@ -39,7 +39,7 @@ interface MoodleEvent {
   courselink: string;
 }
 
-interface PersonalEvent {
+export interface PersonalEvent {
   name: string;
   id: string;
   description: string;

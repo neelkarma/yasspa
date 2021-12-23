@@ -1,36 +1,28 @@
-import { Box, Spinner, Center } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 import { useToday } from "lib/clientFetchResources";
 import { Period } from "./period";
 import { Break } from "./break";
 import { Countdown } from "./countdown";
-import { useCardColors } from "lib/theme";
+import { CenterCard, Card } from "components/card";
+import { TimetableButton } from "components/timetable/timetablebutton";
 
 export const Today: React.FC<{}> = () => {
   const { res } = useToday();
-  const cardStyles = useCardColors();
   if (!res)
     return (
-      <Center
-        borderWidth="1px"
-        borderRadius={15}
-        {...cardStyles}
+      <CenterCard
         h={{ sm: undefined, lg: "100%" }}
         w={{ md: "100%", lg: "32rem" }}
-        p={5}
       >
         <Spinner size="lg" />
-      </Center>
+      </CenterCard>
     );
   console.log(res);
   return (
-    <Box
+    <Card
       className="hide-scrollbar"
-      borderWidth="1px"
-      borderRadius={15}
       overflowY="scroll"
-      {...cardStyles}
       w={{ md: "100%", lg: "32rem" }}
-      p={5}
     >
       <Countdown data={res.data} />
       {res.data.bells.map((bell, index) => {
@@ -43,8 +35,13 @@ export const Today: React.FC<{}> = () => {
             (periodBell) => bell.period === periodBell
           )
         )
-          //@ts-ignore
-          return <Period data={res.data} period={bell.period} key={index} />;
+          return (
+            <Period
+              data={res.data}
+              period={bell.period as "1" | "2" | "3" | "4" | "5"}
+              key={index}
+            />
+          );
 
         return (
           <Break
@@ -54,6 +51,7 @@ export const Today: React.FC<{}> = () => {
           />
         );
       })}
-    </Box>
+      <TimetableButton />
+    </Card>
   );
 };

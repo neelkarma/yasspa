@@ -1,62 +1,51 @@
 export interface Timetable {
-  student: {
-    surname: string;
-    givenname: string;
-    sex: string;
-    DOB: string;
-    roll: string;
-    lines: {
-      [key: string]: string;
-    };
-    extraLines: {
-      [key: string]: string;
-    };
-    studentId: string;
-    year: string;
-    years: string[];
-  };
-  days: {
-    [key: string]: {
-      dayname: string;
-      routine: string;
-      rollcall: {
-        title: string;
-        teacher: string;
-        room: string;
-      };
-      periods: {
-        [key: string]: {
-          title: string;
-          teacher: string;
-          room: string;
-          year: string;
-        };
-      };
-    };
-  };
-  subjects: {
-    [key: string]: {
-      title: string;
-      shortTitle: string;
-      subject: string;
-      teacher: string;
-      fullTeacher: string;
-      year: string;
-    };
-  };
-  extraSubjects: {
-    [key: string]: {
-      title: string;
-      shortTitle: string;
-      teacher: string;
-      fullTeacher: string;
-    };
-  };
-  rollcall: {
-    title: string;
-    teacher: string;
-    fullTeacher: string;
-    room: string;
-  };
+  student: Student;
+  subjects: SubjectClass[];
+  days: { [key: string]: Day };
+  rollcall: SubjectClass;
   advisor: string;
+}
+
+export interface Day {
+  dayname: string;
+  routine: string;
+  rollcall: DayRollcall;
+  periods: { [key: string]: Period };
+  dayNumber: string;
+}
+
+export interface Period {
+  title: string;
+  teacher: null | string;
+  room: null | string;
+  fullTeacher: string;
+  year: string;
+}
+
+export interface DayRollcall {
+  title: string;
+  teacher: string;
+  room: null;
+}
+
+export interface SubjectClass {
+  title: string;
+  shortTitle: string;
+  teacher: null | string;
+  subject: string;
+  fullTeacher: string;
+  year: string;
+  colour: string;
+}
+
+export interface Student {
+  surname: string;
+  givenname: string;
+  gender: string;
+  DOB: null;
+  roll: string;
+  BoSNumber: null;
+  year: string;
+  years: string[];
+  studentId: string;
 }
