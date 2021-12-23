@@ -17,11 +17,12 @@ export const Landing: FC<{}> = () => (
       <Text fontSize="xl" textAlign="center">
         Welcome to YASSPA, yet another SBHS Student Portal alternative.
       </Text>
-      <Alert status="warning" textAlign="center">
+      <Alert status="info" textAlign="center">
         <AlertIcon />
         <strong>
-          Warning: Things are still very much in development and you should not
-          be using this. I&apos;m warning you, things are going to break.{" "}
+          Please don&apos;t nag me about obvious bugs as I&apos;m probably aware
+          of all of them. Fixes (as well as new features) will be coming
+          soon&trade;.
         </strong>
       </Alert>
       {/* eslint-disable-next-line */}
