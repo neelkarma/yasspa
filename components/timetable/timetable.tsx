@@ -1,4 +1,5 @@
 import {
+  Center,
   Grid,
   GridItem,
   Modal,
@@ -73,7 +74,9 @@ export const Timetable: FC<{ isOpen: boolean; onClose: () => void }> = ({
               ))}
             </Grid>
           ) : (
-            <Spinner />
+            <Center>
+              <Spinner />
+            </Center>
           )}
         </ModalBody>
       </ModalContent>
