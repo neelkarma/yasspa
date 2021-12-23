@@ -27,14 +27,14 @@ const Home: NextPage = () => {
   if (!data) return <Loading />;
   if (!data.authorized) return <Landing />;
   return (
-    <Box p={5} h={{ md: undefined, lg: "100vh" }}>
+    <Box p={5} h={{ lg: "100vh" }}>
       <Stack
-        h={{ md: undefined, lg: "100%" }}
+        h={{ lg: "100%" }}
         spacing={7}
-        direction={{ md: "column", lg: "row" }}
+        direction={{ base: "column", lg: "row" }}
       >
         <Today />
-        <VStack w={{ md: undefined, lg: "100%" }}>
+        <VStack w={{ lg: "100%" }}>
           <HStack w="100%" mb={2}>
             <Filter onChange={setFilter} />
             <AvatarMenu />

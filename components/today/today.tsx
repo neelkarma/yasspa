@@ -10,10 +10,7 @@ export const Today: React.FC<{}> = () => {
   const { res } = useToday();
   if (!res)
     return (
-      <CenterCard
-        h={{ sm: undefined, lg: "100%" }}
-        w={{ md: "100%", lg: "32rem" }}
-      >
+      <CenterCard h={{ lg: "100%" }} w={{ md: "100%", lg: "32rem" }}>
         <Spinner size="lg" />
       </CenterCard>
     );
@@ -21,7 +18,7 @@ export const Today: React.FC<{}> = () => {
     <Card
       className="hide-scrollbar"
       overflowY="scroll"
-      w={{ md: "100%", lg: "32rem" }}
+      w={{ base: "100%", lg: "32rem" }}
     >
       <Countdown data={res.data} />
       {res.data.bells.map((bell, index) => {
