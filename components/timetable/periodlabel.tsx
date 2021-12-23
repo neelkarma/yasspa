@@ -22,7 +22,7 @@ export const PeriodLabel: FC<{
   const showDot = !!teacher || !!room;
 
   return (
-    <Popover>
+    <Popover closeOnBlur={false}>
       <PopoverTrigger>
         <GridItem
           onMouseOver={() => onMouseOver(short)}
