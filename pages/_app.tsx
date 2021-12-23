@@ -1,5 +1,5 @@
 import "@fontsource/inter";
-import "../styles.css";
+import "styles/globals.css";
 import { SWRConfig } from "swr";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "lib/theme";
