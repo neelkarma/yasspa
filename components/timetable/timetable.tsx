@@ -8,7 +8,7 @@ import {
   ModalOverlay,
   Spinner,
 } from "@chakra-ui/react";
-import { useTimetable } from "lib/clientFetchResources";
+import { useTimetable, useToday } from "lib/clientFetchResources";
 import { FC, useState } from "react";
 import { DayLabel } from "./daylabel";
 import { PeriodLabel } from "./periodlabel";
@@ -18,7 +18,9 @@ export const Timetable: FC<{ isOpen: boolean; onClose: () => void }> = ({
   onClose,
 }) => {
   const { res } = useTimetable();
+  const { res: todayRes } = useToday();
   const [hoveredClass, setHoveredClass] = useState<string | null>(null);
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -35,7 +37,12 @@ export const Timetable: FC<{ isOpen: boolean; onClose: () => void }> = ({
               {Object.values(res.data.days).map((day, i) => (
                 <GridItem key={i}>
                   <Grid templateRows="repeat(6, 1fr)" rowGap={1}>
-                    <DayLabel>
+                    <DayLabel
+                      isToday={
+                        day.dayname ===
+                        todayRes.data.timetable.timetable.dayname
+                      }
+                    >
                       {[
                         day.dayname.slice(0, 3),
                         " ",

@@ -17,7 +17,6 @@ export const Today: React.FC<{}> = () => {
         <Spinner size="lg" />
       </CenterCard>
     );
-  console.log(res);
   return (
     <Card
       className="hide-scrollbar"
