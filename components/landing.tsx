@@ -11,15 +11,15 @@ import {
 } from "@chakra-ui/react";
 
 export const Landing: FC<{}> = () => (
-  <Grid minH="100vh">
+  <Grid minH="100vh" p={5}>
     <Center>
       <VStack spacing={5}>
         {/* TODO: Add logo here */}
         <Heading size="3xl">YASSPA</Heading>
-        <Text fontSize="xl">
+        <Text fontSize="xl" textAlign="center">
           Welcome to YASSPA, yet another SBHS Student Portal alternative.
         </Text>
-        <Alert status="warning">
+        <Alert status="warning" textAlign="center">
           <AlertIcon />
           <strong>
             Warning: Things are still very much in development and you should
