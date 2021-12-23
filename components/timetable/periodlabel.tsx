@@ -7,7 +7,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useCardHoverColor, useMutedTextColor } from "lib/theme";
-import { FC } from "react";
+import { FC, memo } from "react";
 
 export const PeriodLabel: FC<{
   short: string;
@@ -16,7 +16,7 @@ export const PeriodLabel: FC<{
   room: string | null;
   isHovered?: boolean;
   onMouseOver: (short: string) => void;
-}> = ({ short, long, teacher, room, isHovered, onMouseOver }) => {
+}> = memo(({ short, long, teacher, room, isHovered, onMouseOver }) => {
   const hoverColor = useCardHoverColor();
   const mutedTextColor = useMutedTextColor();
   const showDot = !!teacher || !!room;
@@ -47,4 +47,4 @@ export const PeriodLabel: FC<{
       </PopoverContent>
     </Popover>
   );
-};
+});

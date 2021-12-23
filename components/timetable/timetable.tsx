@@ -9,7 +9,6 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { useTimetable } from "lib/clientFetchResources";
-import { useMutedTextColor } from "lib/theme";
 import { FC, useState } from "react";
 import { DayLabel } from "./daylabel";
 import { PeriodLabel } from "./periodlabel";
