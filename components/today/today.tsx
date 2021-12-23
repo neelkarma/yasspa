@@ -5,8 +5,11 @@ import { Break } from "./break";
 import { Countdown } from "./countdown";
 import { CenterCard, Card } from "components/card";
 import { TimetableButton } from "components/timetable/timetablebutton";
+import { useContext } from "react";
+import { SettingsContext } from "components/settingscontext";
 
 export const Today: React.FC<{}> = () => {
+  const { debug } = useContext(SettingsContext);
   const { res } = useToday();
   if (!res)
     return (
@@ -14,6 +17,9 @@ export const Today: React.FC<{}> = () => {
         <Spinner size="lg" />
       </CenterCard>
     );
+
+  if (debug) console.log("today", res);
+
   return (
     <Card
       className="hide-scrollbar"

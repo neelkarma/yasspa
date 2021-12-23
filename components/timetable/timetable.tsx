@@ -9,8 +9,9 @@ import {
   ModalOverlay,
   Spinner,
 } from "@chakra-ui/react";
+import { SettingsContext } from "components/settingscontext";
 import { useTimetable, useToday } from "lib/clientFetchResources";
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { DayLabel } from "./daylabel";
 import { PeriodLabel } from "./periodlabel";
 
@@ -20,7 +21,10 @@ export const Timetable: FC<{ isOpen: boolean; onClose: () => void }> = ({
 }) => {
   const { res } = useTimetable();
   const { res: todayRes } = useToday();
+  const { debug } = useContext(SettingsContext);
   const [hoveredClass, setHoveredClass] = useState<string | null>(null);
+
+  if (res && debug) console.log("timetable", res);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

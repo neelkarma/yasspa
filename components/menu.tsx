@@ -9,13 +9,23 @@ import {
   MenuDivider,
   useColorMode,
 } from "@chakra-ui/react";
-import { IoLogOut, IoLogoGithub, IoSunny, IoMoon } from "react-icons/io5";
-import { FC } from "react";
+import {
+  IoLogOut,
+  IoLogoGithub,
+  IoSunny,
+  IoMoon,
+  IoBug,
+} from "react-icons/io5";
+import { FC, useContext } from "react";
 import { useUserInfo } from "lib/clientFetchResources";
+import { SettingsContext } from "./settingscontext";
 
-export const AvatarMenu: FC<{}> = () => {
+export const AvatarMenu: FC<{
+  toggleDebugChange: (debug: boolean) => void;
+}> = ({ toggleDebugChange }) => {
   const { res, error } = useUserInfo();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { debug } = useContext(SettingsContext);
 
   return (
     <Menu>
@@ -45,6 +55,15 @@ export const AvatarMenu: FC<{}> = () => {
             <IoSunny style={{ fontSize: "1.2rem", marginRight: "10px" }} />
           )}
           <span>{colorMode === "light" ? "Dark Mode" : "Light Mode"}</span>
+        </MenuItem>
+        <MenuItem onClick={() => toggleDebugChange(!debug)}>
+          <IoBug
+            style={{
+              fontSize: "1.2rem",
+              marginRight: "10px",
+            }}
+          />
+          <span>{debug ? "Disable" : "Enable"} Debug Mode</span>
         </MenuItem>
         {/* eslint-disable-next-line */}
         <a href="/api/auth/logout">

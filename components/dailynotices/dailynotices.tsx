@@ -4,9 +4,12 @@ import { useDailyNotices } from "lib/clientFetchResources";
 import Fuse from "fuse.js";
 import { useMutedTextColor } from "lib/theme";
 import { Card, CenterCard } from "components/card";
+import { useContext } from "react";
+import { SettingsContext } from "components/settingscontext";
 
 export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
   const { res } = useDailyNotices();
+  const { debug } = useContext(SettingsContext);
   const mutedTextColor = useMutedTextColor();
 
   if (!res)
@@ -15,6 +18,8 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
         <Spinner />
       </CenterCard>
     );
+
+  if (debug) console.log("daily notices", res);
 
   if (res.data.notices.length <= 0)
     return (
