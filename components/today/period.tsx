@@ -1,5 +1,5 @@
 import { Flex, Box, Text, HStack, Spacer } from "@chakra-ui/react";
-import type { Today } from "lib/clientFetchResources";
+import type { Today } from "types/api/today";
 import { useCardHoverColor, useMutedTextColor } from "lib/theme";
 
 export const Period: React.FC<{

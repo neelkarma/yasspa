@@ -1,5 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { Today, Bell } from "lib/clientFetchResources";
+import { Today, Bell } from "types/api/today";
 import { FC, useCallback, useEffect, useState } from "react";
 import Head from "next/head";
 
