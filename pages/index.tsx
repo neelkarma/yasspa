@@ -9,7 +9,6 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 import useSWR from "swr";
-
 import { Landing } from "components/landing";
 import { Loading } from "components/loading";
 import { Today } from "components/today/today";
@@ -18,9 +17,8 @@ import { DailyNotices } from "components/dailynotices/dailynotices";
 import { AvatarMenu } from "components/menu";
 import { Barcode } from "components/barcode/barcode";
 import { Profile } from "components/profile/profile";
-
-import type { NextPage } from "next";
 import { SettingsContext } from "components/settingscontext";
+import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   const { data } = useSWR("/api/auth/status");

@@ -1,10 +1,8 @@
 import { FC } from "react";
-import { Grid, Center, Spinner } from "@chakra-ui/react";
+import { Center, Spinner } from "@chakra-ui/react";
 
 export const Loading: FC<{}> = () => (
-  <Grid minH="100vh">
-    <Center>
-      <Spinner />
-    </Center>
-  </Grid>
+  <Center minH="100vh">
+    <Spinner />
+  </Center>
 );
