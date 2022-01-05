@@ -2,7 +2,7 @@ export type AwardScheme = {
   year: string;
   activity: string;
   category: string;
-  categoryName: string;
   points: string;
-  pointsCap: number;
+  categoryName: string | null;
+  pointsCap: 0 | string | null;
 }[];

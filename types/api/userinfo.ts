@@ -5,7 +5,7 @@ export interface UserInfo {
   surname: string;
   rollClass: string;
   yearGroup: string;
-  role: "Student" | "Teacher" | "Staff";
+  role: string;
   department: string;
   office: string;
   email: string;

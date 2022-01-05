@@ -16,9 +16,9 @@ import { Filter } from "components/filter";
 import { DailyNotices } from "components/dailynotices/dailynotices";
 import { AvatarMenu } from "components/menu";
 import { Barcode } from "components/barcode/barcode";
-import { Profile } from "components/profile/profile";
 import { SettingsContext } from "components/settingscontext";
 import type { NextPage } from "next";
+import { Links } from "components/links/links";
 
 const Home: NextPage = () => {
   const { data } = useSWR("/api/auth/status");
@@ -66,9 +66,9 @@ const Home: NextPage = () => {
               <GridItem>
                 <VStack h="100%">
                   <Heading size="lg" textAlign="left" w="100%">
-                    Profile
+                    Links
                   </Heading>
-                  <Profile />
+                  <Links />
                 </VStack>
               </GridItem>
             </Grid>
