@@ -8,20 +8,20 @@ import type { AppProps } from "next/app";
 import { ErrorBoundary } from "components/errorboundary";
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ErrorBoundary>
-    <SWRConfig
-      value={{
-        fetcher: (resource: string) =>
-          fetch(resource).then((res) => res.json()),
-      }}
-    >
-      <ChakraProvider theme={theme}>
+  <ChakraProvider theme={theme}>
+    <ErrorBoundary>
+      <SWRConfig
+        value={{
+          fetcher: (resource: string) =>
+            fetch(resource).then((res) => res.json()),
+        }}
+      >
         <Head>
           <title>YASSPA</title>
         </Head>
         <Component {...pageProps} />
-      </ChakraProvider>
-    </SWRConfig>
-  </ErrorBoundary>
+      </SWRConfig>
+    </ErrorBoundary>
+  </ChakraProvider>
 );
 export default App;
