@@ -1,17 +1,40 @@
-import { Spinner } from "@chakra-ui/react";
+import {
+  Spinner,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
+  Center,
+  HStack,
+  IconButton,
+} from "@chakra-ui/react";
 import { CenterCard, Card } from "components/card";
 import { SettingsContext } from "components/settingscontext";
 import JsBarcode from "jsbarcode";
 import { useUserInfo } from "lib/clientFetchResources";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { IoSave } from "react-icons/io5";
 
 export const Barcode: React.FC<{}> = () => {
   const { res } = useUserInfo();
+  const barcRef = useRef<HTMLCanvasElement>(null);
+  const [barcHeight, setBarcHeight] = useState(100);
   const { debug } = useContext(SettingsContext);
 
   useEffect(() => {
-    if (res) JsBarcode("#barcode", res.data.studentId);
+    if (res)
+      JsBarcode(barcRef.current, res.data.studentId, { displayValue: false });
   }, [res]);
+
+  const handleSaveClick = useCallback(() => {
+    const anchor = document.createElement("a");
+    anchor.href = barcRef.current!.toDataURL();
+    anchor.download = `${res.data.studentId}-barcode`;
+    anchor.click();
+    setTimeout(() => {
+      anchor.remove();
+    }, 0);
+  }, [res.data.studentId]);
 
   if (!res)
     return (
@@ -24,8 +47,28 @@ export const Barcode: React.FC<{}> = () => {
 
   return (
     <Card>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img id="barcode" alt={`Student ID Barcode for ${res.data.studentId}`} />
+      <HStack gap={1} w="100%">
+        <IconButton
+          aria-label="Download Barcode"
+          icon={<IoSave />}
+          onClick={handleSaveClick}
+        />
+        <Slider
+          aria-label="Set Barcode Size"
+          min={10}
+          max={100}
+          defaultValue={100}
+          onChange={setBarcHeight}
+        >
+          <SliderTrack>
+            <SliderFilledTrack />
+          </SliderTrack>
+          <SliderThumb />
+        </Slider>
+      </HStack>
+      <Center h="80%">
+        <canvas ref={barcRef} style={{ height: `${barcHeight}%` }} />
+      </Center>
     </Card>
   );
 };
