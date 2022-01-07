@@ -37,7 +37,7 @@ const GridLink: FC<{ icon: IconType; href: string; label: string }> = ({
         <LinkOverlay href={href}>
           <VStack>
             <Icon style={{ fontSize: "3rem" }} />
-            <Text>{label}</Text>
+            <Text textAlign="center">{label}</Text>
           </VStack>
         </LinkOverlay>
       </LinkBox>

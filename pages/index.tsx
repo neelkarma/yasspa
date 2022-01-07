@@ -42,12 +42,12 @@ const Home: NextPage = () => {
             </HStack>
             <Grid
               templateRows="repeat(2, 1fr)"
-              templateColumns="repeate(2, 1fr)"
+              templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
               w="100%"
               h="100%"
               gap={5}
             >
-              <GridItem colSpan={2}>
+              <GridItem colSpan={{ base: undefined, md: 2 }}>
                 <VStack h="100%">
                   <Heading size="lg" textAlign="left" w="100%">
                     Daily Notices
