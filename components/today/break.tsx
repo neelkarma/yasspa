@@ -1,10 +1,10 @@
 import { Flex, Text, Spacer } from "@chakra-ui/react";
-import type { Today } from "types/api/today";
+import type { BreakAbbreviation, Today } from "types/api/today";
 import { useCardHoverColor, useMutedTextColor } from "lib/theme";
 
 export const Break: React.FC<{
   data: Today;
-  type: "R" | "MTL1" | "MTL2";
+  type: BreakAbbreviation;
 }> = ({ data, type }) => {
   return (
     <PureBreak

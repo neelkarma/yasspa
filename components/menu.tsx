@@ -23,7 +23,7 @@ import { SettingsContext } from "./settingscontext";
 export const AvatarMenu: FC<{
   toggleDebugChange: (debug: boolean) => void;
 }> = ({ toggleDebugChange }) => {
-  const { res, error } = useUserInfo();
+  const { res } = useUserInfo();
   const { colorMode, toggleColorMode } = useColorMode();
   const { debug } = useContext(SettingsContext);
 

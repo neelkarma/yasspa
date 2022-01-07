@@ -9,6 +9,9 @@ export interface Today {
   shouldDisplayVariations: boolean;
 }
 
+export type PeriodNumber = "1" | "2" | "3" | "4" | "5";
+export type BreakAbbreviation = "R" | "MTL1" | "MTL2";
+
 export interface Bell {
   period: string;
   startTime: string;

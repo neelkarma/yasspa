@@ -7,6 +7,7 @@ import { CenterCard, Card } from "components/card";
 import { TimetableButton } from "components/timetable/timetablebutton";
 import { useContext } from "react";
 import { SettingsContext } from "components/settingscontext";
+import { PeriodNumber, BreakAbbreviation } from "types/api/today";
 
 export const Today: React.FC<{}> = () => {
   const { debug } = useContext(SettingsContext);
@@ -40,7 +41,7 @@ export const Today: React.FC<{}> = () => {
           return (
             <Period
               data={res.data}
-              period={bell.period as "1" | "2" | "3" | "4" | "5"}
+              period={bell.period as PeriodNumber}
               key={index}
             />
           );
@@ -48,7 +49,7 @@ export const Today: React.FC<{}> = () => {
         return (
           <Break
             data={res.data}
-            type={bell.period as "R" | "MTL1" | "MTL2"}
+            type={bell.period as BreakAbbreviation}
             key={index}
           />
         );
