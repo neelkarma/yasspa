@@ -34,7 +34,7 @@ export const Barcode: React.FC<{}> = () => {
     setTimeout(() => {
       anchor.remove();
     }, 0);
-  }, [res.data.studentId]);
+  }, [res?.data.studentId]);
 
   if (!res)
     return (
