@@ -8,16 +8,17 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 export const Landing: FC<{}> = () => (
-  <Center minH="100vh" p={5}>
+  <Center minH="100vh" p={5} textAlign="center">
     <VStack spacing={5}>
       {/* TODO: Add logo here */}
       <Heading size="3xl">YASSPA</Heading>
-      <Text fontSize="xl" textAlign="center">
+      <Text fontSize="xl">
         Welcome to YASSPA, yet another SBHS Student Portal alternative.
       </Text>
-      <Alert status="info" textAlign="center">
+      <Alert status="info">
         <AlertIcon />
         <strong>
           Please don&apos;t nag me about obvious bugs as I&apos;m probably aware
@@ -25,12 +26,11 @@ export const Landing: FC<{}> = () => (
           soon&trade;.
         </strong>
       </Alert>
-      {/* eslint-disable-next-line */}
-      <a href="/api/auth/login">
+      <Link href="/api/auth/login" passHref>
         <Button colorScheme="blue" size="lg">
           Log In
         </Button>
-      </a>
+      </Link>
     </VStack>
   </Center>
 );

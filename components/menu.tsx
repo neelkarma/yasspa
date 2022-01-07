@@ -19,6 +19,7 @@ import {
 import { FC, useContext } from "react";
 import { useUserInfo } from "lib/clientFetchResources";
 import { SettingsContext } from "./settingscontext";
+import Link from "next/link";
 
 export const AvatarMenu: FC<{
   toggleDebugChange: (debug: boolean) => void;
@@ -65,8 +66,7 @@ export const AvatarMenu: FC<{
           />
           <span>{debug ? "Disable" : "Enable"} Debug Mode</span>
         </MenuItem>
-        {/* eslint-disable-next-line */}
-        <a href="/api/auth/logout">
+        <Link href="/api/auth/logout" passHref>
           <MenuItem>
             <IoLogOut
               style={{
@@ -76,7 +76,7 @@ export const AvatarMenu: FC<{
             />
             <span>Log Out</span>
           </MenuItem>
-        </a>
+        </Link>
         <MenuDivider />
         <a href="https://www.github.com/neelkarma/yasspa">
           <MenuItem>

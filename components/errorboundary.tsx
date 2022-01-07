@@ -10,6 +10,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Head from "next/head";
+import NextLink from "next/link";
 import { Component, ErrorInfo } from "react";
 
 interface ErrorBoundaryState {
@@ -39,22 +40,22 @@ export class ErrorBoundary extends Component<{}, ErrorBoundaryState> {
     }
 
     return (
-      <Center minH="100vh" p={5}>
+      <Center minH="100vh" p={5} textAlign="center">
         <Head>
           <title>Client Error | YASSPA</title>
         </Head>
         <VStack spacing={5}>
           <Heading size="2xl">Client Error | YASSPA</Heading>
-          <Alert status="warning" textAlign="center" maxW="max-content">
+          <Alert status="warning" maxW="max-content">
             <AlertIcon />
             <strong>
               If you&apos;re a graduated student, staff member or teacher,
               YASSPA will not work for you. Sorry.
             </strong>
           </Alert>
-          <Text textAlign="center">
-            For now, click the &quot;Try Again&quot; button below. If the error
-            persists,{" "}
+          <Text>
+            For now, click the reload button below. If the error persists, try
+            the sign out button. If it still persists,{" "}
             <Link
               color="blue.400"
               href="https://www.github.com/neelkarma/yasspa/issues/new"
@@ -65,8 +66,11 @@ export class ErrorBoundary extends Component<{}, ErrorBoundaryState> {
           </Text>
           <HStack gap={1}>
             <Button colorScheme="blue" onClick={() => window.location.reload()}>
-              Try Again
+              Reload
             </Button>
+            <NextLink href="/api/auth/logout" passHref>
+              <Button colorScheme="blue">Sign Out</Button>
+            </NextLink>
             <Button
               onClick={() => {
                 navigator.clipboard.writeText(error.stack ?? String(error));
