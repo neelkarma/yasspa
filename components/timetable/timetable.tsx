@@ -30,7 +30,7 @@ export const Timetable: FC<{ isOpen: boolean; onClose: () => void }> = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalCloseButton />
+        <ModalCloseButton /> {/*TODO: How to make closing the modal cleaner? */}
         <ModalBody p={5}>
           {res ? (
             <Grid

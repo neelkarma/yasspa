@@ -9,6 +9,7 @@ export const DayLabel: FC<{ isToday?: boolean }> = memo(
       <GridItem
         color={isToday ? "blue.300" : mutedTextColor}
         textAlign="center"
+        p={{ base: undefined, md: 1 }}
       >
         {children}
       </GridItem>

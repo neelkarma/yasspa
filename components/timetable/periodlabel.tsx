@@ -33,6 +33,7 @@ export const PeriodLabel: FC<{
           borderRadius="5px"
           cursor="pointer"
           userSelect="none"
+          p={{ base: undefined, md: 1 }}
         >
           {short}
         </GridItem>
