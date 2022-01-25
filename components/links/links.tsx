@@ -31,10 +31,10 @@ const GridLink: FC<{ icon: IconType; href: string; label: string }> = ({
       _hover={{ backgroundColor: hoverColor }}
       transitionTimingFunction="ease-out"
       transitionDuration="100ms"
-      maxW="fit-content"
+      minW="full"
     >
       <LinkBox p={3}>
-        <LinkOverlay href={href}>
+        <LinkOverlay href={href} target="_blank" rel="noreferrer">
           <VStack>
             <Icon style={{ fontSize: "3rem" }} />
             <Text textAlign="center">{label}</Text>
