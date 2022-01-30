@@ -1,6 +1,6 @@
 import { IronSession } from "iron-session";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { refreshAccessToken } from "./auth";
+import { getToken, refreshAccessToken } from "./auth";
 import { API_BASE } from "./constants";
 
 type sbhsAPIEndpoint =
@@ -29,20 +29,9 @@ export const fetchResource = async (
   res: NextApiResponse,
   apiOpts?: sbhsAPIOpts
 ) => {
-  let { token } = req.session;
-  if (!token) return res.status(403).json({ error: "Unauthorized" });
-
   try {
-    if (Date.now() > token.expiry) {
-      token = await refreshAccessToken(token.refresh_token);
-      req.session.token = token;
-      await req.session.save();
-    }
-  } catch {
-    return res.status(500).json({ error: "The SBHS server fucked up" });
-  }
+    const token = await getToken(req);
 
-  try {
     const apiRes = await fetch(
       `${API_BASE}/${resourcePath}${
         apiOpts ? `?${new URLSearchParams(apiOpts)}` : ""

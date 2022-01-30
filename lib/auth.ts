@@ -1,3 +1,5 @@
+import { IronSession } from "iron-session";
+import { NextApiRequest } from "next";
 import { Token } from "types/auth";
 import { NIL } from "uuid";
 import {
@@ -14,6 +16,24 @@ export const getLoginURI = () => {
     state: NIL,
   });
   return `${LOGIN_ENDPOINT}?${queryParams}`;
+};
+
+export const getToken = async (
+  req: NextApiRequest & { session: IronSession }
+) => {
+  let { token } = req.session;
+  if (!token) {
+    throw new Error("Unauthorized");
+  }
+  if (Date.now() > token.expiry) {
+    token = await refreshAccessToken(token.refresh_token);
+    req.session.token = token;
+    req.session.save();
+    if (Date.now() > token.expiry) {
+      throw new Error("Refresh Token Expired");
+    }
+  }
+  return token;
 };
 
 export const refreshAccessToken = async (refreshToken: string) => {
