@@ -1,6 +1,7 @@
+import { IronSession } from "iron-session";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { Session } from "next-iron-session";
-import { auth } from "./auth";
+import { refreshAccessToken } from "./auth";
+import { API_BASE } from "./constants";
 
 type sbhsAPIEndpoint =
   | "barcodenews/list.json"
@@ -24,18 +25,17 @@ type sbhsAPIOpts = {
 
 export const fetchResource = async (
   resourcePath: sbhsAPIEndpoint,
-  req: NextApiRequest & { session: Session },
+  req: NextApiRequest & { session: IronSession },
   res: NextApiResponse,
   apiOpts?: sbhsAPIOpts
 ) => {
-  const sessionToken = req.session.get("token");
-  if (!sessionToken) return res.status(403).json({ error: "Unauthorized" });
+  let { token } = req.session;
+  if (!token) return res.status(403).json({ error: "Unauthorized" });
 
-  let token = auth.createToken(sessionToken);
   try {
-    if (token.expired()) {
-      token = await token.refresh();
-      req.session.set("token", token.token);
+    if (Date.now() > token.expiry) {
+      token = await refreshAccessToken(token.refresh_token);
+      req.session.token = token;
       await req.session.save();
     }
   } catch {
@@ -44,12 +44,12 @@ export const fetchResource = async (
 
   try {
     const apiRes = await fetch(
-      "https://student.sbhs.net.au/api/" +
-        resourcePath +
-        (apiOpts ? "?" + new URLSearchParams(apiOpts) : ""),
+      `${API_BASE}/${resourcePath}${
+        apiOpts ? `?${new URLSearchParams(apiOpts)}` : ""
+      }`,
       {
         headers: new Headers({
-          Authorization: "Bearer " + token.token.access_token,
+          Authorization: "Bearer " + token.access_token,
         }),
       }
     );
