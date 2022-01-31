@@ -13,6 +13,7 @@ import { SettingsContext } from "components/contexts";
 import { useTimetable, useToday } from "lib/clientFetchResources";
 import { FC, useContext, useState } from "react";
 import { DayLabel } from "./daylabel";
+import { FreePeriodLabel } from "./freeperiodlabel";
 import { PeriodLabel } from "./periodlabel";
 
 export const Timetable: FC<{ isOpen: boolean; onClose: () => void }> = ({
@@ -54,25 +55,37 @@ export const Timetable: FC<{ isOpen: boolean; onClose: () => void }> = ({
                         day.dayname.slice(3),
                       ].join("")}
                     </DayLabel>
-                    {Object.values(day.periods).map(
-                      ({ title: short, room, fullTeacher: teacher }, i) => {
-                        const { title: long } = Object.values(
-                          res.data.subjects
-                        ).find((sub) => sub.shortTitle === short)!;
-
+                    {["1", "2", "3", "4", "5"].map((period, i) => {
+                      if (!day.periods.hasOwnProperty(period))
                         return (
-                          <PeriodLabel
-                            short={short}
-                            long={long}
-                            teacher={teacher}
-                            room={room}
+                          <FreePeriodLabel
+                            isHovered={"-" === hoveredClass}
                             onMouseOver={setHoveredClass}
-                            isHovered={short === hoveredClass}
                             key={i}
                           />
                         );
-                      }
-                    )}
+                      const {
+                        title: short,
+                        room,
+                        fullTeacher: teacher,
+                      } = day.periods[period];
+
+                      const { title: long } = Object.values(
+                        res.data.subjects
+                      ).find((sub) => sub.shortTitle === short)!;
+
+                      return (
+                        <PeriodLabel
+                          short={short}
+                          long={long}
+                          teacher={teacher}
+                          room={room}
+                          onMouseOver={setHoveredClass}
+                          isHovered={short === hoveredClass}
+                          key={i}
+                        />
+                      );
+                    })}
                   </Grid>
                 </GridItem>
               ))}
