@@ -75,7 +75,7 @@ export const About: FC<{
                 <>
                   Built from commit{" "}
                   <Link
-                    href={`https://www.github.com/neelkarma/yasspa/commits/${hash}`}
+                    href={`https://www.github.com/neelkarma/yasspa/commit/${hash}`}
                     fontFamily="mono"
                     fontWeight="bold"
                     isExternal
