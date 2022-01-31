@@ -9,7 +9,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { CenterCard, Card } from "components/card";
-import { SettingsContext } from "components/settingscontext";
+import { SettingsContext } from "components/contexts";
 import JsBarcode from "jsbarcode";
 import { useUserInfo } from "lib/clientFetchResources";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";

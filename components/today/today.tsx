@@ -6,7 +6,7 @@ import { Countdown } from "./countdown";
 import { CenterCard, Card } from "components/card";
 import { TimetableButton } from "components/timetable/timetablebutton";
 import { useContext } from "react";
-import { SettingsContext } from "components/settingscontext";
+import { SettingsContext } from "components/contexts";
 import { PeriodNumber, BreakAbbreviation } from "types/api/today";
 
 export const Today: React.FC<{}> = () => {

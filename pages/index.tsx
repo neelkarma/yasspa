@@ -16,11 +16,13 @@ import { Filter } from "components/filter";
 import { DailyNotices } from "components/dailynotices/dailynotices";
 import { AvatarMenu } from "components/menu";
 import { Barcode } from "components/barcode/barcode";
-import { SettingsContext } from "components/settingscontext";
-import type { NextPage } from "next";
+import { SettingsContext } from "components/contexts";
+import type { GetStaticProps, NextPage } from "next";
 import { Links } from "components/links/links";
 
-const Home: NextPage = () => {
+const Home: NextPage<{ version: { hash: string | null; date: string } }> = ({
+  version,
+}) => {
   const { data } = useSWR("/api/auth/status");
   const [filter, setFilter] = useState("");
   const [debug, setDebug] = useState(false);
@@ -38,7 +40,7 @@ const Home: NextPage = () => {
           <VStack w={{ lg: "100%" }}>
             <HStack w="100%" mb={2}>
               <Filter onChange={setFilter} />
-              <AvatarMenu toggleDebugChange={setDebug} />
+              <AvatarMenu toggleDebugChange={setDebug} version={version} />
             </HStack>
             <Grid
               templateRows="repeat(2, 1fr)"
@@ -77,6 +79,17 @@ const Home: NextPage = () => {
       </Box>
     </SettingsContext.Provider>
   );
+};
+
+export const getStaticProps: GetStaticProps = () => {
+  return {
+    props: {
+      version: {
+        hash: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? null,
+        date: new Date().toISOString(),
+      },
+    },
+  };
 };
 
 export default Home;

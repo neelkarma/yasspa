@@ -5,7 +5,7 @@ import Fuse from "fuse.js";
 import { useMutedTextColor } from "lib/theme";
 import { Card, CenterCard } from "components/card";
 import { useContext } from "react";
-import { SettingsContext } from "components/settingscontext";
+import { SettingsContext } from "components/contexts";
 
 export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
   const { res } = useDailyNotices();

@@ -15,15 +15,18 @@ import {
   IoSunny,
   IoMoon,
   IoBug,
+  IoInformationCircle,
 } from "react-icons/io5";
 import { FC, useContext } from "react";
 import { useUserInfo } from "lib/clientFetchResources";
-import { SettingsContext } from "./settingscontext";
+import { SettingsContext } from "./contexts";
 import Link from "next/link";
+import { AboutButton } from "./about";
 
 export const AvatarMenu: FC<{
   toggleDebugChange: (debug: boolean) => void;
-}> = ({ toggleDebugChange }) => {
+  version: { hash: string | null; date: string };
+}> = ({ version, toggleDebugChange }) => {
   const { res } = useUserInfo();
   const { colorMode, toggleColorMode } = useColorMode();
   const { debug } = useContext(SettingsContext);
@@ -78,6 +81,7 @@ export const AvatarMenu: FC<{
           </MenuItem>
         </Link>
         <MenuDivider />
+        <AboutButton version={version} />
         <a href="https://www.github.com/neelkarma/yasspa">
           <MenuItem>
             <IoLogoGithub

@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   Spinner,
 } from "@chakra-ui/react";
-import { SettingsContext } from "components/settingscontext";
+import { SettingsContext } from "components/contexts";
 import { useTimetable, useToday } from "lib/clientFetchResources";
 import { FC, useContext, useState } from "react";
 import { DayLabel } from "./daylabel";
