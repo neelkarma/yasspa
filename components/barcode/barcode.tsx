@@ -12,10 +12,17 @@ import { CenterCard, Card } from "components/card";
 import { SettingsContext } from "components/contexts";
 import JsBarcode from "jsbarcode";
 import { useUserInfo } from "lib/clientFetchResources";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  memo,
+} from "react";
 import { IoSave } from "react-icons/io5";
 
-export const Barcode: React.FC<{}> = () => {
+export const Barcode: React.FC = memo(() => {
   const { res } = useUserInfo();
   const barcRef = useRef<HTMLCanvasElement>(null);
   const [barcHeight, setBarcHeight] = useState(100);
@@ -71,4 +78,4 @@ export const Barcode: React.FC<{}> = () => {
       </Center>
     </Card>
   );
-};
+});

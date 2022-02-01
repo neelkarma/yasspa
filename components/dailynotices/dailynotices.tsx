@@ -36,13 +36,13 @@ export const DailyNotices: React.FC<{ filter: string }> = ({ filter }) => {
     return (
       <Card>
         <Accordion allowMultiple w="100%">
-          {res.data.notices.map((notice, index) => (
+          {res.data.notices.map((notice, i) => (
             <Notice
               title={notice.title}
               author={notice.authorName}
               content={notice.content}
               years={notice.displayYears}
-              key={index}
+              key={i}
             />
           ))}
         </Accordion>

@@ -2,14 +2,13 @@ import {
   Text,
   SimpleGrid,
   GridItem,
-  Link,
   VStack,
   LinkOverlay,
   LinkBox,
 } from "@chakra-ui/react";
 import { Card } from "components/card";
 import { useCardHoverColor } from "lib/theme";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { IconType } from "react-icons";
 import {
   IoDocument,
@@ -45,7 +44,7 @@ const GridLink: FC<{ icon: IconType; href: string; label: string }> = ({
   );
 };
 
-export const Links: FC = () => {
+export const Links: FC = memo(() => {
   return (
     <Card>
       <SimpleGrid columns={3} justifyItems="center">
@@ -77,4 +76,4 @@ export const Links: FC = () => {
       </SimpleGrid>
     </Card>
   );
-};
+});

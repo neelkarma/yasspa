@@ -5,11 +5,11 @@ import { Break } from "./break";
 import { Countdown } from "./countdown";
 import { CenterCard, Card } from "components/card";
 import { TimetableButton } from "components/timetable/timetablebutton";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { SettingsContext } from "components/contexts";
 import { PeriodNumber, BreakAbbreviation } from "types/api/today";
 
-export const Today: React.FC<{}> = () => {
+export const Today: React.FC = memo(() => {
   const { debug } = useContext(SettingsContext);
   const { res } = useToday();
   if (!res)
@@ -45,7 +45,6 @@ export const Today: React.FC<{}> = () => {
               key={index}
             />
           );
-
         return (
           <Break
             data={res.data}
@@ -57,4 +56,4 @@ export const Today: React.FC<{}> = () => {
       <TimetableButton />
     </Card>
   );
-};
+});

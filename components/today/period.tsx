@@ -27,8 +27,8 @@ export const Period: React.FC<{
 export const PurePeriod: React.FC<{
   name: string;
   time: string;
-  teacher: string;
-  room: string;
+  teacher?: string;
+  room?: string;
   isTimeChange?: boolean;
   isRoomChange?: boolean;
   isSub?: boolean;
@@ -59,8 +59,12 @@ export const PurePeriod: React.FC<{
         <HStack spacing={1} fontWeight="light">
           <Text>at</Text>
           <Text color={isTimeChange ? "blue.300" : undefined}>{time}</Text>
-          <Text color={mutedTextColor}>with</Text>
-          <Text color={isSub ? "blue.300" : mutedTextColor}>{teacher}</Text>
+          {!teacher || (
+            <>
+              <Text color={mutedTextColor}>with</Text>
+              <Text color={isSub ? "blue.300" : mutedTextColor}>{teacher}</Text>
+            </>
+          )}
         </HStack>
       </Box>
       <Spacer minW="12px" />
@@ -69,7 +73,7 @@ export const PurePeriod: React.FC<{
         fontSize="1.2rem"
         alignSelf="center"
       >
-        {room}
+        {room ?? "-"}
       </Text>
     </Flex>
   );

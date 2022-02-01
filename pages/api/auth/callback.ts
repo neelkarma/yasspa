@@ -7,7 +7,7 @@ export default withSession(async (req, res) => {
       code: req.query.code as string,
       redirect_uri: "",
     });
-    req.session.set("token", token);
+    req.session.token = token;
     await req.session.save();
     res.redirect("/");
   } catch (e) {

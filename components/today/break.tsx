@@ -13,6 +13,8 @@ export const Break: React.FC<{
           R: "Recess",
           MTL1: "Lunch 1",
           MTL2: "Lunch 2",
+          WFL1: "Lunch 1",
+          WFL2: "Lunch 2",
         }[type]
       }
       time={data.bells.find((val) => val.period === type)!.time}

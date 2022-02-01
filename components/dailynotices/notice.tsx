@@ -18,7 +18,7 @@ export const Notice: React.FC<{
 }> = ({ title, author, content, years }) => (
   <AccordionItem>
     <AccordionButton>
-      <VStack>
+      <VStack alignItems="left">
         <Text fontSize="1.3rem">{title}</Text>
         <HStack>
           <Tag colorScheme="cyan">{years}</Tag>
