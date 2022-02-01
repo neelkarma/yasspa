@@ -1,8 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getLoginURI } from "lib/auth";
+import { auth } from "lib/auth";
+import { NIL } from "uuid";
 
 const login = (_: NextApiRequest, res: NextApiResponse) => {
-  res.redirect(getLoginURI());
+  res.redirect(
+    auth.authorizeURL({
+      redirect_uri: process.env.REDIRECT_URI!,
+      scope: "all-ro",
+      state: NIL,
+    })
+  );
 };
 
 export default login;

@@ -1,9 +1,8 @@
-import { IronSession } from "iron-session";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getToken, refreshAccessToken } from "./auth";
+import { auth } from "./auth";
 import { API_BASE } from "./constants";
 
-type sbhsAPIEndpoint =
+type SBHSAPIEndpoint =
   | "barcodenews/list.json"
   | "calendar/days.json"
   | "calendar/terms.json" // Used
@@ -16,7 +15,7 @@ type sbhsAPIEndpoint =
   | "details/userinfo.json"; //Used
 
 // Don't change this to an interface, it breaks if it's an interface
-type sbhsAPIOpts = {
+type SBHSAPIOptions = {
   date?: string;
   from?: string;
   to?: string;
@@ -24,21 +23,33 @@ type sbhsAPIOpts = {
 };
 
 export const fetchResource = async (
-  resourcePath: sbhsAPIEndpoint,
-  req: NextApiRequest & { session: IronSession },
+  endpoint: SBHSAPIEndpoint,
+  req: NextApiRequest,
   res: NextApiResponse,
-  apiOpts?: sbhsAPIOpts
+  options?: SBHSAPIOptions
 ) => {
   try {
-    const token = await getToken(req);
+    const sessionToken = req.session.token;
+    if (!sessionToken) return res.status(403).json({ error: "Unauthorized" });
+
+    let token = auth.createToken(sessionToken);
+    try {
+      if (token.expired()) {
+        token = await token.refresh();
+        req.session.token = token.token;
+        await req.session.save();
+      }
+    } catch {
+      return res.status(500).json({ error: "The SBHS server fucked up" });
+    }
 
     const apiRes = await fetch(
-      `${API_BASE}/${resourcePath}${
-        apiOpts ? `?${new URLSearchParams(apiOpts)}` : ""
+      `${API_BASE}/${endpoint}${
+        options ? "?" + new URLSearchParams(options) : ""
       }`,
       {
         headers: new Headers({
-          Authorization: "Bearer " + token.access_token,
+          Authorization: "Bearer " + token.token.access_token,
         }),
       }
     );
