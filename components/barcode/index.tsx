@@ -74,7 +74,10 @@ export const Barcode: React.FC = memo(() => {
         </Slider>
       </HStack>
       <Center h="80%">
-        <canvas ref={barcRef} style={{ height: `${barcHeight}%` }} />
+        <canvas
+          ref={barcRef}
+          style={{ height: `${barcHeight}%`, maxWidth: "100%" }}
+        />
       </Center>
     </Card>
   );

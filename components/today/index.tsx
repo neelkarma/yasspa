@@ -4,7 +4,7 @@ import { Period } from "./period";
 import { Break } from "./break";
 import { Countdown } from "./countdown";
 import { CenterCard, Card } from "components/card";
-import { TimetableButton } from "components/timetable/timetablebutton";
+import { TimetableButton } from "components/timetable";
 import { memo, useContext } from "react";
 import { SettingsContext } from "components/contexts";
 import { PeriodNumber, BreakAbbreviation } from "types/api/today";

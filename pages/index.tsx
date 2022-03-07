@@ -11,14 +11,14 @@ import {
 import useSWR from "swr";
 import { Landing } from "components/landing";
 import { Loading } from "components/loading";
-import { Today } from "components/today/today";
+import { Today } from "components/today";
 import { Filter } from "components/filter";
-import { DailyNotices } from "components/dailynotices/dailynotices";
+import { DailyNotices } from "components/dailynotices";
 import { AvatarMenu } from "components/menu";
-import { Barcode } from "components/barcode/barcode";
+import { Barcode } from "components/barcode";
 import { SettingsContext } from "components/contexts";
 import type { GetStaticProps, NextPage } from "next";
-import { Links } from "components/links/links";
+import { Links } from "components/links";
 
 const Home: NextPage<{ version: { hash: string | null; date: string } }> = ({
   version,

@@ -1,11 +1,14 @@
 import { Flex, Box, Text, HStack, Spacer } from "@chakra-ui/react";
 import type { PeriodNumber, Today } from "types/api/today";
+import { FreePeriod } from "./freeperiod";
 import { useCardHoverColor, useMutedTextColor } from "lib/theme";
 
 export const Period: React.FC<{
   data: Today;
   period: PeriodNumber;
 }> = ({ data, period }) => {
+  console.log(data);
+  if (!(period in data.timetable.timetable.periods)) return <FreePeriod />;
   return (
     <PurePeriod
       name={
