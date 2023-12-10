@@ -1,6 +1,5 @@
 import { CLIENT_ID, CLIENT_SECRET } from "$env/static/private";
 import { API_BASE, WEBSITE_URL } from "$lib/server/consts";
-import type { Cookies } from "@sveltejs/kit";
 import { Issuer, type TokenSet } from "openid-client";
 
 const issuer = new Issuer({
@@ -16,37 +15,12 @@ export const client = new issuer.Client({
   response_types: ["code"],
 });
 
-export const tokenSets = new Map<string, TokenSet>();
-
-// once every day, remove all expired token sets
-setInterval(() => {
-  for (const [clientToken, tokenSet] of tokenSets) {
-    if (tokenSet.expired()) {
-      tokenSets.delete(clientToken);
-    }
-  }
-}, 24 * 60 * 60 * 1000);
-
-export const getClientToken = (cookies: Cookies) => {
-  return cookies.get("Authorization")?.split(" ")[1];
-};
-
-export const deleteTokenSet = (cookies: Cookies) => {
-  const clientToken = getClientToken(cookies);
-  if (clientToken) tokenSets.delete(clientToken);
-};
-
-export const getTokenSet = (cookies: Cookies) => {
-  const clientToken = getClientToken(cookies);
-  if (clientToken) return tokenSets.get(clientToken);
-};
-
 export const makeRequest = async <T>(
   path: string,
   tokenSet: TokenSet
 ): Promise<T> => {
   const res = await client.requestResource(`${API_BASE}${path}`, tokenSet);
-  return JSON.parse(res.body.toString());
+  return JSON.parse(res.body?.toString() ?? "{}");
 };
 
 export const getTodayData = async (

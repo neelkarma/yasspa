@@ -1,4 +1,5 @@
-import { getTodayData, getTokenSet } from "$lib/server/sbhs";
+import { getTodayData } from "$lib/server/sbhs";
+import { getTokenSet } from "$lib/server/session";
 import type { PageServerLoad } from "./$types";
 
 export const load = (async ({

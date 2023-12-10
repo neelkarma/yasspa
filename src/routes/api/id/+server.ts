@@ -1,4 +1,5 @@
-import { getStudentID, getTokenSet } from "$lib/server/sbhs";
+import { getStudentID } from "$lib/server/sbhs";
+import { getTokenSet } from "$lib/server/session";
 import { error, json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 

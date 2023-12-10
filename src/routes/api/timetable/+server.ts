@@ -1,4 +1,5 @@
-import { getTimetableData, getTokenSet } from "$lib/server/sbhs";
+import { getTimetableData } from "$lib/server/sbhs";
+import { getTokenSet } from "$lib/server/session";
 import { error, json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 
