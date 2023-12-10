@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+:root {
+  @apply font-sans bg-stone-800 text-white;
+}
+
+:focus-visible {
+  @apply transition ease-out outline-none ring-2 ring-blue-600;
+}
+
+a {
+  @apply transition ease-out underline;
+}
