@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { parseDateTime } from "$lib/utils";
-  import { formatDistance } from "date-fns";
+  import { dateFnsLocale, parseDateTime } from "$lib/utils";
+  import { formatDuration, intervalToDuration } from "date-fns";
   import { onMount } from "svelte";
   import type { PageServerData } from "../../routes/$types";
 
@@ -21,10 +21,14 @@
         today.date,
         today.periods[nextPeriodIndex].time
       );
-      const timeUntilPeriod = formatDistance(periodTime, now, {
-        includeSeconds: true,
+      const duration = intervalToDuration({
+        start: now,
+        end: periodTime,
       });
-      return [nextPeriodIndex, timeUntilPeriod];
+      const durationText = formatDuration(duration, {
+        locale: dateFnsLocale,
+      });
+      return [nextPeriodIndex, durationText];
     }
     return null;
   };
@@ -50,13 +54,13 @@
   $: nextPeriodIndex = nextPeriodData[0];
   $: nextPeriod =
     nextPeriodIndex !== null ? today.periods[nextPeriodIndex as number] : null;
-  $: timeUntilPeriod = nextPeriodData[1];
+  $: durationText = nextPeriodData[1];
 </script>
 
 <svelte:head>
   <title>
     {nextPeriod
-      ? `${periodDisplayName(nextPeriod, true)} in ${timeUntilPeriod} | YASSPA`
+      ? `${periodDisplayName(nextPeriod, true)} in ${durationText} | YASSPA`
       : "YASSPA"}
   </title>
 </svelte:head>
@@ -66,7 +70,7 @@
     <span class="font-bold">{periodDisplayName(nextPeriod)}</span>
     <span>
       <span class="text-stone-400">in</span>
-      {timeUntilPeriod}.
+      {durationText}.
     </span>
   {:else}
     Have a great day!
