@@ -2,6 +2,10 @@
   import Button from "./Button.svelte";
 </script>
 
+<svelte:head>
+  <title>YASSPA</title>
+</svelte:head>
+
 <form
   action="/auth?/login"
   method="post"

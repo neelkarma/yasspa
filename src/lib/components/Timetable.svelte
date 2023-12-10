@@ -51,7 +51,7 @@
                 {#if period.type === "free"}
                   <span class="grow text-center text-stone-500">-</span>
                 {:else if period.type === "class"}
-                  <span class="grow">{period.subject.split(" ")[0]}</span>
+                  <span class="grow">{period.subject}</span>
                   <span>{period.room ?? "-"}</span>
                 {/if}
               </div>

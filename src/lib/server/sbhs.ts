@@ -1,6 +1,9 @@
 import { CLIENT_ID, CLIENT_SECRET } from "$env/static/private";
 import { API_BASE, WEBSITE_URL } from "$lib/server/consts";
-import { Issuer, type TokenSet } from "openid-client";
+import type { Cookies } from "@sveltejs/kit";
+import { Issuer } from "openid-client";
+import { InvalidRefreshTokenError, TokenSetNotPresentError } from "./errors";
+import { getTokenSet, storeTokenSet } from "./session";
 
 const issuer = new Issuer({
   issuer: API_BASE,
@@ -17,21 +20,36 @@ export const client = new issuer.Client({
 
 export const makeRequest = async <T>(
   path: string,
-  tokenSet: TokenSet
-): Promise<T> => {
-  const res = await client.requestResource(`${API_BASE}${path}`, tokenSet);
+  cookies: Cookies
+): Promise<T | null> => {
+  let tokenSet = getTokenSet(cookies);
+  if (!tokenSet) throw new TokenSetNotPresentError();
+
+  let res = await client.requestResource(`${API_BASE}${path}`, tokenSet);
+  if (res.statusCode !== 200) {
+    try {
+      tokenSet = await client.refresh(tokenSet);
+    } catch {
+      throw new InvalidRefreshTokenError();
+    }
+    storeTokenSet(cookies, tokenSet);
+    res = await client.requestResource(`${API_BASE}${path}`, tokenSet);
+  }
+
   return JSON.parse(res.body?.toString() ?? "{}");
 };
 
 export const getTodayData = async (
-  tokenSet: TokenSet
+  cookies: Cookies
 ): Promise<{
   day: string;
+  date: string;
   periods: (
     | {
         type: "class";
         period: number;
         subject: string;
+        subjectShort: string;
         teacher: string;
         room: string;
         isCancelled: boolean;
@@ -65,8 +83,9 @@ export const getTodayData = async (
 }> => {
   const dayTimetable = await makeRequest<any>(
     "/timetable/daytimetable.json",
-    tokenSet
+    cookies
   );
+
   const bells = dayTimetable.bells;
   const periods = dayTimetable.timetable.timetable.periods;
 
@@ -146,6 +165,7 @@ export const getTodayData = async (
       type: "class",
       period: Number(bell.period),
       subject: subject.title,
+      subjectShort: period.title.split(" ")[0],
       teacher: classVariation?.casual || period.fullTeacher,
       room: classVariation?.roomTo || roomVariation?.roomTo || period.room,
       isCancelled,
@@ -157,12 +177,13 @@ export const getTodayData = async (
 
   return {
     day: dayTimetable.timetable.timetable.dayname,
+    date: dayTimetable.date,
     periods: transformed as any[],
   };
 };
 
 export const getTimetableData = async (
-  tokenSet: TokenSet
+  cookies: Cookies
 ): Promise<
   {
     day: string;
@@ -182,7 +203,7 @@ export const getTimetableData = async (
 > => {
   const timetable = await makeRequest<any>(
     "/timetable/timetable.json",
-    tokenSet
+    cookies
   );
 
   const days: any[][] = [[], [], []];
@@ -208,7 +229,7 @@ export const getTimetableData = async (
       periods.push({
         type: "class",
         period: Number(periodNum),
-        subject: period.title,
+        subject: period.title.split(" ")[0],
         room: period.room,
       });
     }
@@ -223,7 +244,7 @@ export const getTimetableData = async (
 };
 
 export const getDailyNotices = async (
-  tokenSet: TokenSet
+  cookies: Cookies
 ): Promise<
   {
     title: string;
@@ -233,7 +254,7 @@ export const getDailyNotices = async (
     author: string;
   }[]
 > => {
-  const notices = await makeRequest<any>("/dailynews/list.json", tokenSet);
+  const notices = await makeRequest<any>("/dailynews/list.json", cookies);
 
   return notices.notices.map((notice: any) => ({
     title: notice.title,
@@ -244,7 +265,7 @@ export const getDailyNotices = async (
   }));
 };
 
-export const getStudentID = async (tokenSet: TokenSet): Promise<string> => {
-  const userinfo = await makeRequest<any>("/details/userinfo.json", tokenSet);
+export const getStudentID = async (cookies: Cookies): Promise<string> => {
+  const userinfo = await makeRequest<any>("/details/userinfo.json", cookies);
   return userinfo.studentId;
 };

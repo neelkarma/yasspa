@@ -1,5 +1,4 @@
 import { getTodayData } from "$lib/server/sbhs";
-import { getTokenSet } from "$lib/server/session";
 import type { PageServerLoad } from "./$types";
 
 export const load = (async ({
@@ -8,17 +7,16 @@ export const load = (async ({
   | { authorized: false }
   | { authorized: true; today: Awaited<ReturnType<typeof getTodayData>> }
 > => {
-  const tokenSet = getTokenSet(cookies);
-  if (!tokenSet) {
+  try {
+    const today = await getTodayData(cookies);
+    return {
+      authorized: true,
+      today,
+    };
+  } catch (err) {
+    console.error(err);
     return {
       authorized: false,
     };
   }
-
-  const today = await getTodayData(tokenSet);
-
-  return {
-    authorized: true,
-    today,
-  };
 }) satisfies PageServerLoad;

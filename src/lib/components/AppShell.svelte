@@ -17,7 +17,7 @@
   <div class="grow grid place-items-center p-2 overflow-x-auto">
     <div class="flex flex-col gap-1">
       {#if !viewingTimetable}
-        <Today today={today.periods} />
+        <Today {today} />
         <Button on:click={() => (viewingTimetable = true)}
           >View Timetable</Button
         >

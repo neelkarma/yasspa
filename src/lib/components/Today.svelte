@@ -1,17 +1,21 @@
 <script lang="ts">
-  import { humanizeTime } from "$lib/utils";
+  import { humanizeTime, parseDateTime } from "$lib/utils";
   import type { PageServerData } from "../../routes/$types";
   import ClassPeriod from "./ClassPeriod.svelte";
   import FreePeriod from "./FreePeriod.svelte";
+  import NextUp from "./NextUp.svelte";
 
-  export let today: NonNullable<PageServerData["today"]>["periods"];
+  export let today: NonNullable<PageServerData["today"]>;
 </script>
 
-<div class="flex flex-col p-5 rounded-lg bg-stone-800 text-sm md:text-base">
+<div
+  class="flex flex-col gap-3 p-5 rounded-lg bg-stone-800 text-sm md:text-base"
+>
+  <NextUp {today} />
   <div class="grid items-center today-grid-layout gap-x-2 gap-y-3">
-    {#each today.filter((period) => period.type !== "transition") as period}
+    {#each today.periods.filter((period) => period.type !== "transition") as period}
       <span class="text-stone-500 justify-self-end"
-        >{humanizeTime(period.time)}</span
+        >{humanizeTime(parseDateTime(today.date, period.time))}</span
       >
       {#if period.type === "rollcall"}
         <p class="text-stone-400 pl-2">Roll Call</p>

@@ -3,7 +3,7 @@ import type { Cookies } from "@sveltejs/kit";
 import jwt from "jsonwebtoken";
 import { TokenSet } from "openid-client";
 
-export const signSessionToken = (tokenSet: TokenSet) =>
+const signSessionToken = (tokenSet: TokenSet) =>
   jwt.sign(JSON.stringify(tokenSet), SESSION_SECRET);
 
 const verifySessionToken = (token: string): TokenSet | null => {
@@ -16,11 +16,20 @@ const verifySessionToken = (token: string): TokenSet | null => {
   }
 };
 
-export const getClientToken = (cookies: Cookies) =>
+const getClientToken = (cookies: Cookies) =>
   cookies.get("Authorization")?.split(" ")[1];
 
 export const getTokenSet = (cookies: Cookies) => {
   const clientToken = getClientToken(cookies);
   if (clientToken) return verifySessionToken(clientToken);
   return null;
+};
+
+export const storeTokenSet = (cookies: Cookies, tokenSet: TokenSet) => {
+  const sessionToken = signSessionToken(tokenSet);
+  cookies.set("Authorization", `Bearer ${sessionToken}`, {
+    path: "/",
+    httpOnly: true,
+    maxAge: 90 * 24 * 60 * 60, // 90 days
+  });
 };
