@@ -23,7 +23,7 @@
     </div>
   {:then timetable}
     {#each timetable as week, i}
-      <div class="grid timetable-grid gap-1 text-sm md:text-base">
+      <div class="grid timetable-grid gap-1 md:gap-x-3 text-sm md:text-base">
         {#each week as day}
           <div class="flex flex-col">
             <span

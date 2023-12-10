@@ -10,7 +10,6 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.27.4",
 		"autoprefixer": "^10.4.16",
 		"postcss": "^8.4.32",
@@ -24,6 +23,7 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/inter": "^5.0.16",
+		"@sveltejs/adapter-vercel": "^3.1.0",
 		"date-fns": "^2.30.0",
 		"jsbarcode": "^3.11.6",
 		"openid-client": "^5.6.1"
