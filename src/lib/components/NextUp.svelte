@@ -61,11 +61,13 @@
   </title>
 </svelte:head>
 
-<div class="text-center text-lg md:text-xl">
+<div class="flex flex-col text-center text-xl md:text-2xl">
   {#if nextPeriod}
     <span class="font-bold">{periodDisplayName(nextPeriod)}</span>
-    <span class="text-stone-400">in</span>
-    {timeUntilPeriod}.
+    <span>
+      <span class="text-stone-400">in</span>
+      {timeUntilPeriod}.
+    </span>
   {:else}
     Have a great day!
   {/if}

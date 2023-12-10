@@ -9,7 +9,7 @@
 </script>
 
 <div
-  class="flex flex-col gap-3 p-5 rounded-lg bg-stone-800 text-sm md:text-base"
+  class="flex flex-col gap-4 p-5 rounded-lg bg-stone-800 text-sm md:text-base"
 >
   <NextUp {today} />
   <div class="grid items-center today-grid-layout gap-x-2 gap-y-3">
