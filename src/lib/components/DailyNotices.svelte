@@ -11,12 +11,17 @@
     fetch("/api/notices").then((res) => res.json());
 
   onMount(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        noticesPromise = getNoticesPromise();
-        observer.unobserve(observedEl);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          noticesPromise = getNoticesPromise();
+          observer.unobserve(observedEl);
+        }
+      },
+      {
+        threshold: 0.05,
       }
-    });
+    );
     observer.observe(observedEl);
   });
 
