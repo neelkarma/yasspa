@@ -8,6 +8,22 @@ export const humanizeTime = (date: Date) => format(date, "h:mm a");
 
 export const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
+export const periodDisplayName = (period: any, useShortSubject = false) => {
+  switch (period.type) {
+    case "transition":
+      return "Transition";
+    case "rollcall":
+      return "Roll Call";
+    case "free":
+      return "Free Period";
+    case "dayend":
+      return "End of Day";
+    case "break":
+      return period.break;
+    case "class":
+      return useShortSubject ? period.subjectShort : period.subject;
+  }
+};
 const formatDistanceLocale: { [key: string]: string } = {
   lessThanXSeconds: "{{count}}s",
   xSeconds: "{{count}}s",

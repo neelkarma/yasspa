@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { dateFnsLocale, parseDateTime } from "$lib/utils";
+  import { dateFnsLocale, parseDateTime, periodDisplayName } from "$lib/utils";
   import { formatDuration, intervalToDuration } from "date-fns";
   import { onMount } from "svelte";
   import type { PageServerData } from "../../routes/$types";
@@ -31,23 +31,6 @@
       return [nextPeriodIndex, durationText];
     }
     return null;
-  };
-
-  const periodDisplayName = (period: any, useShortSubject = false) => {
-    switch (period.type) {
-      case "transition":
-        return "Transition";
-      case "rollcall":
-        return "Roll Call";
-      case "free":
-        return "Free Period";
-      case "dayend":
-        return "End of Day";
-      case "break":
-        return period.break;
-      case "class":
-        return useShortSubject ? period.subjectShort : period.subject;
-    }
   };
 
   $: nextPeriodData = getNextPeriod(now) ?? [null, null];

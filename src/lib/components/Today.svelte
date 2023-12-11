@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { humanizeTime, parseDateTime } from "$lib/utils";
+  import { humanizeTime, parseDateTime, periodDisplayName } from "$lib/utils";
   import type { PageServerData } from "../../routes/$types";
   import ClassPeriod from "./ClassPeriod.svelte";
   import FreePeriod from "./FreePeriod.svelte";
@@ -17,16 +17,12 @@
       <span class="text-stone-500 justify-self-end"
         >{humanizeTime(parseDateTime(today.date, period.time))}</span
       >
-      {#if period.type === "rollcall"}
-        <p class="text-stone-400 pl-2">Roll Call</p>
-      {:else if period.type === "class"}
+      {#if period.type === "class"}
         <ClassPeriod {...period} />
       {:else if period.type === "free"}
         <FreePeriod {...period} />
-      {:else if period.type === "break"}
-        <p class="text-stone-400 pl-2">{period.break}</p>
-      {:else if period.type === "dayend"}
-        <p class="text-stone-400 pl-2">End of Day</p>
+      {:else}
+        <p class="text-stone-400 pl-2">{periodDisplayName(period)}</p>
       {/if}
     {/each}
   </div>
