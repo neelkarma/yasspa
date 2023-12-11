@@ -118,6 +118,7 @@ export const getTodayData = async (
           time: bell.time,
         });
         continue;
+      case "L1":
       case "MTL1":
         transformed.push({
           type: "break",
@@ -125,6 +126,7 @@ export const getTodayData = async (
           time: bell.time,
         });
         continue;
+      case "L2":
       case "MTL2":
         transformed.push({
           type: "break",
