@@ -1,5 +1,5 @@
 import { format, parse } from "date-fns";
-import { enAU } from "date-fns/locale";
+import defaultLocale from "date-fns/locale/en-AU/index.js";
 
 export const parseDateTime = (dateString: string, timeString: string) =>
   parse(`${dateString} ${timeString}`, "yyyy-MM-dd HH:mm", new Date());
@@ -28,7 +28,7 @@ const formatDistanceLocale: { [key: string]: string } = {
 };
 
 export const dateFnsLocale: Locale = {
-  ...enAU,
+  ...defaultLocale,
   formatDistance: (token, count, options) => {
     options = options || {};
 
