@@ -78,13 +78,16 @@
           })}
           {#each filteredNotices as notice, i}
             <div class="flex flex-col gap-1">
-              <h3 class="text-lg md:text-xl">
-                {notice.title}
-              </h3>
-              <span>{@html notice.content}</span>
-              <p class="text-stone-400">
-                {notice.author} - {notice.displayYears}
-              </p>
+              <details>
+                <summary class="text-lg md:text-xl">
+                  {notice.title}
+                  <span class="text-stone-400">({notice.displayYears})</span>
+                </summary>
+                <span>{@html notice.content}</span>
+                <p class="text-stone-400">
+                  {notice.author}
+                </p>
+              </details>
             </div>
             {#if i !== filteredNotices.length - 1}
               <hr class="border-stone-600" />

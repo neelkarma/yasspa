@@ -15,7 +15,7 @@ export const periodDisplayName = (period: any, useShortSubject = false) => {
     case "rollcall":
       return "Roll Call";
     case "free":
-      return "Free Period";
+      return useShortSubject ? "Free" : "Free Period";
     case "dayend":
       return "End of Day";
     case "break":
@@ -24,6 +24,7 @@ export const periodDisplayName = (period: any, useShortSubject = false) => {
       return useShortSubject ? period.subjectShort : period.subject;
   }
 };
+
 const formatDistanceLocale: { [key: string]: string } = {
   lessThanXSeconds: "{{count}}s",
   xSeconds: "{{count}}s",

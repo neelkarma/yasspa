@@ -119,6 +119,7 @@ export const getTodayData = async (
         });
         continue;
       case "L1":
+      case "WFL1":
       case "MTL1":
         transformed.push({
           type: "break",
@@ -127,6 +128,7 @@ export const getTodayData = async (
         });
         continue;
       case "L2":
+      case "WFL2":
       case "MTL2":
         transformed.push({
           type: "break",
