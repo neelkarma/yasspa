@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PageServerData } from "../../routes/$types";
+  import type { TodayData } from "$lib/server/types";
   import Button from "./Button.svelte";
   import Credits from "./Credits.svelte";
   import DailyNotices from "./DailyNotices.svelte";
@@ -7,7 +7,7 @@
   import Timetable from "./Timetable.svelte";
   import Today from "./Today.svelte";
 
-  export let today: NonNullable<PageServerData["today"]>;
+  export let today: TodayData;
 
   let viewingTimetable = false;
 </script>
@@ -18,11 +18,11 @@
     <div class="flex flex-col gap-1">
       {#if !viewingTimetable}
         <Today {today} />
-        <Button on:click={() => (viewingTimetable = true)}
-          >View Timetable</Button
-        >
+        <Button on:click={() => (viewingTimetable = true)}>
+          View Timetable
+        </Button>
       {:else}
-        <Timetable dayName={today.day} />
+        <Timetable dayName={today?.day} />
         <Button on:click={() => (viewingTimetable = false)}>View Today</Button>
       {/if}
     </div>

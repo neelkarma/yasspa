@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { getTimetableData } from "$lib/server/sbhs";
+  import type { TimetableData } from "$lib/server/types";
   import Button from "./Button.svelte";
   import ErrorBox from "./ErrorBox.svelte";
 
-  const getTimetablePromise = (): ReturnType<typeof getTimetableData> =>
+  const getTimetablePromise = (): Promise<TimetableData> =>
     fetch("/api/timetable").then((res) => res.json());
 
   let timetablePromise = getTimetablePromise();
 
-  export let dayName: string;
+  export let dayName: string | undefined;
 
   let hoveredPeriod: string | null = null;
 </script>

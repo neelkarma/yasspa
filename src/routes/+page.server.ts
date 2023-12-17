@@ -1,14 +1,11 @@
-import { getTodayData } from "$lib/server/sbhs";
+import type { TodayData } from "$lib/server/types";
 import type { PageServerLoad } from "./$types";
 
 export const load = (async ({
-  cookies,
-}): Promise<
-  | { authorized: false }
-  | { authorized: true; today: Awaited<ReturnType<typeof getTodayData>> }
-> => {
+  locals,
+}): Promise<{ authorized: false } | { authorized: true; today: TodayData }> => {
   try {
-    const today = await getTodayData(cookies);
+    const today = await locals.sbhs.getTodayData();
     return {
       authorized: true,
       today,

@@ -5,9 +5,13 @@ import { STATE_COOKIE } from "./consts.js";
 export const actions = {
   login: async ({ cookies }) => {
     const state = crypto.randomUUID();
-    cookies.set(STATE_COOKIE, state);
+    cookies.set(STATE_COOKIE, state, {
+      path: "/",
+      httpOnly: true,
+      maxAge: 60 * 60,
+    });
 
-    throw redirect(
+    redirect(
       302,
       client.authorizationUrl({
         scope: "all-ro",
@@ -16,11 +20,8 @@ export const actions = {
     );
   },
 
-  logout: async ({ cookies }) => {
-    cookies.delete("Authorization", {
-      path: "/",
-      httpOnly: true,
-    });
-    throw redirect(302, "/");
+  logout: async ({ locals }) => {
+    locals.sbhs.logout();
+    redirect(302, "/");
   },
 };

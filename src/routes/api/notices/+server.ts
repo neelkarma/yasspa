@@ -1,14 +1,13 @@
-import { getDailyNotices } from "$lib/server/sbhs";
 import { error, json } from "@sveltejs/kit";
 import { handleAPIError } from "../common";
 import type { RequestHandler } from "./$types";
 
-export const GET = (async ({ cookies }) => {
+export const GET = (async ({ locals }) => {
   try {
-    const notices = await getDailyNotices(cookies);
+    const notices = await locals.sbhs.getDailyNotices();
     return json(notices);
   } catch (err) {
     handleAPIError(err);
-    throw error(500, { message: "Unreachable" });
+    error(500, { message: "Unreachable" });
   }
 }) satisfies RequestHandler;

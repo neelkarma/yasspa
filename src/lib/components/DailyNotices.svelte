@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { getDailyNotices } from "$lib/server/sbhs";
+  import type { DailyNoticesData } from "$lib/server/types";
   import { onMount } from "svelte";
   import Button from "./Button.svelte";
   import ErrorBox from "./ErrorBox.svelte";
 
-  let noticesPromise: ReturnType<typeof getDailyNotices> | null = null;
+  let noticesPromise: Promise<DailyNoticesData> | null = null;
   let observedEl: HTMLDivElement;
 
   const getNoticesPromise = () =>
